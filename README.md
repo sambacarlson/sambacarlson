@@ -3,8 +3,12 @@
 
 ## Hi. I'm Carlson 🙂
 
-welcome to my own little corner <br>
-Feel free to poke around ✌🏿
+welcome to my corner. <br>
+Feel free to poke around ✌🏿 
+#### Keep these in mind;
+_ Big things have small beginnings. - ```Wes Berry``` <br>
+_ Be yourself. Everyone else is already taken. - ```Oscar Wilde``` <br>
+_ You only live once, but if you do it right, once is enough. - ```Mae West``` <br>
 
 
 
