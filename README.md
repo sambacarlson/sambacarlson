@@ -1,14 +1,13 @@
-
-
-
-## Hi. I'm Carlson 🙂
-
-welcome to my corner. <br>
-Feel free to poke around ✌🏿 
+#### welcome to my profile
+Feel free to look around. 
 #### Keep these in mind;
-_ Big things have small beginnings. - ```Wes Berry``` <br>
-_ Be yourself. Everyone else is already taken. - ```Oscar Wilde``` <br>
-_ You only live once, but if you do it right, once is enough. - ```Mae West``` <br>
+_ Be yourself. Everyone else is already taken. - ```Oscar Wilde``` \
+_ You only live once, but if you do it right, once is enough. - ```Mae West``` \
+##### Connect with me;
+[linkedIn](https://www.linkedin.com/in/sambacarlson) \
+[youtube](youtube.com/@sambacarlson) \
+[facebook](facebook.com/sambacarlson) \
+[website](https://sambacarlson.vercel.app/)
 
 
 
