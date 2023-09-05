@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         primary: "#222020",
         secondary: "#08b085",
+        secondaryLight: "#08b08530"
       },
       dropShadow: {
         light: "-2px -2px 5px rgba(0, 0, 0, 0.3)",
@@ -23,6 +24,9 @@ module.exports = {
           // "0px 0px 10px rgba(200, 200, 200, 0.5)",
         ],
       },
+      fontFamily: {
+        gothic: ['Didact Gothic', 'sans-serif']
+      }
     },
   },
   plugins: [],
