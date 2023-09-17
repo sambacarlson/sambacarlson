@@ -3,75 +3,10 @@ import { SiLinkedin } from 'react-icons/si'
 import { PiPhoneCallFill } from 'react-icons/pi'
 import { MdLocationOn } from 'react-icons/md'
 import Image from 'next/image'
+import { profileText, myEducation, myReference, myExperience, mySkills } from './resumeData'
+import { Education, Experience, Reference, Skill } from './resumeTypes'
 
 
-interface Experience {
-  date: string,
-  title: string,
-  company: string,
-  activities: {
-    overview: string,
-    highlights: string[]
-  }
-}
-
-interface Education {
-  date: string,
-  school: string,
-  degree: string,
-  details: string
-}
-
-interface Reference {
-  name: string,
-  org: string,
-  email: string
-}
-
-const profileText = "Purposeful Junior software developer with a passion for building rubust and efficient applications. Having a firm understanding of fundamental software engineering principles and programming languages such as Python, TypeScript and Go. Having a commended team spirit and commitment to continous learning and inprovement."
-
-const myExperience: Experience[] = [
-  {
-    date: "Nov 2022 - Present",
-    title: "Developer",
-    company: "Iknite Space",
-    activities: {
-      overview: "Worked on some of the company's major projects. both at on the front ",
-      highlights: [
-        "The first six months was focused on training, coaching and evalating",
-        "The next six months was Internship period",
-      ]
-    }
-  }
-]
-
-const myEducation: Education[] = [
-  {
-    date: "Oct 2020 - Jul 2021",
-    school: "HIBMAT Buea",
-    degree: "BTech Software Eng.",
-    details: "Obtained and top up Bachelor of Technology in Software Engineering with a GPA of 3.76 on 4"
-  },
-  {
-    date: "Oct 2016 - Aug 2020",
-    school: "HIBMAT Buea",
-    degree: "HND Hardware Maintenance",
-    details: "Obtained The Higher national diploma in hardware maintenance with an average of 13 on 20"
-  }
-]
-
-const myReference:Reference[] = [
-  {
-    name: "Dr Ngolah Kenneth",
-    org: "Academic supervisor. HIBMAT",
-    email: "timngolah@yahoo.com"
-  },
-  {
-    name: "Amin Jefferson",
-    org: "Manager. Iknite Space",
-    email: "amin@iknite.studio"
-  }
-]
 
 export default function Resume() {
   return (
@@ -103,19 +38,18 @@ export default function Resume() {
           </div>
           <div className="flex flex-col">
             <h3 className="font-bold text-xl text-secondary mt-0 md:mt-4 border-b border-secondaryLight ">Skills</h3>
-            <ul className="my-2 list-inside list-disc">
-              <li>TypeScript, Go, Python</li>
-              <li>NodeJs, NextJs, Gin</li>
-              <li>MongoDb, Postgresql</li>
-              <li>Docker</li>
-            </ul>
+            {
+              mySkills.map(skill => (
+                <Skill key={skill.class + mySkills.indexOf(skill)} skill={skill} />
+              ))
+            }
           </div>
           <div className="flex flex-col">
             <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">Education</h3>
             <div className="flex flex-col my-2">
               {
                 myEducation.map((ed: Education) => (
-                  <Education key={ed.school+ed.degree} edu={{date: ed.date, school: ed.school, degree: ed.degree, details:ed.details}} />
+                  <Education key={ed.school + ed.degree} edu={{ date: ed.date, school: ed.school, degree: ed.degree, details: ed.details }} />
                 ))
               }
             </div>
@@ -125,7 +59,7 @@ export default function Resume() {
             <div className="my-2 flex-col space-y-2">
               {
                 myReference.map((rf: Reference) => (
-                  <Reference key={rf.name+rf.email} reference={{name: rf.name, org: rf.org, email: rf.email}} />
+                  <Reference key={rf.name + rf.email} reference={{ name: rf.name, org: rf.org, email: rf.email }} />
                 ))
               }
             </div>
@@ -155,11 +89,14 @@ const Experience = ({ exp }: { exp: Experience }) => {
     <div className="grid grid-cols-4 my-2">
       <em className="col-span-4 md:col-span-1 text-secondary text-sm">{exp.date}</em>
       <div className="col-span-4 md:col-span-3 flex flex-col">
-        <h4 className="font-bold text-lg">{exp.title} <span className="mx-4 md:mx-12 font-sm font-semibold italic">{exp.company}</span></h4>
+        <div className="flex flex-row">
+          <h4 className="font-bold text-lg">{exp.title} </h4>
+          <span className="mx-4 md:mx-12 font-sm font-semibold italic">{exp.company}</span>
+        </div>
         <p className="pr-4 md:pr-8 ">{exp.activities.overview}</p>
-        <ul className="">
+        <ul className="list-disc list-outside pl-[1.2em] text-">
           {exp.activities.highlights.map((item: string) => (
-            <li key={item}>{item}</li>
+            <li key={item} className="text-secondary"><span className="text-primary">{item}</span></li>
           ))}
         </ul>
       </div>
@@ -175,20 +112,46 @@ const Education = ({ edu }: { edu: Education }) => {
           <h4 className="font-bold">{edu.school}</h4>
           <em className="text-sm text-secondary">{edu.date}</em>
         </div>
-        <h4 className="font-sm font-semibold italic">{edu.degree}</h4>
+        <h5 className="font-sm font-semibold italic">{edu.degree}</h5>
       </div>
       <p className="">{edu.details}</p>
     </div>
   )
 }
 
-const Reference =({reference}: {reference: Reference}) => {
-  console.log("name", reference.name)
+const Reference = ({ reference }: { reference: Reference }) => {
   return (
     <div className="flex flex-col">
-      <h5 className="font-bold">{reference.name}</h5>
+      <h4 className="font-bold">{reference.name}</h4>
       <p className="">{reference.org}</p>
       <em className="text-secondary">{reference.email}</em>
+    </div>
+  )
+}
+
+const Skill = ({ skill }: { skill: Skill }) => {
+  return (
+    <div className="flex flex-col my-2">
+      <h4 className="font-bold">{skill.class}</h4>
+      <ul className="list-disc list-inside">
+        {
+          skill.skills.map(skill => (
+            <div key={skill.title + skill.score} className="flex flex-row justify-between gap-4">
+              <li className="font-sm italic"><span className="text-secondary">{skill.title}</span></li>
+              <Score score={skill.score} />
+            </div>
+          ))
+        }
+      </ul>
+    </div>
+  )
+}
+
+
+const Score = ({ score }: { score: number }) => {
+  return (
+    <div className="flex w-full max-w-[100px] h-2 bg-secondaryLight self-center rounded-e-md">
+      <div style={{ width: `${score * 10}%` }} className="h-full bg-secondary rounded-e-md"></div>
     </div>
   )
 }
