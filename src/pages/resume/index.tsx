@@ -11,27 +11,28 @@ import { Education, Experience, Reference, Skill } from '@/types/resumeTypes'
 export default function Resume() {
   return (
     <main className="flex flex-col items-center text-primary w-full lg:max-w-[1000px] min-h-[1000px] mx-auto font-gothic border">
-      <div className="flex flex-col w-full relative">
-        <div className="md:absolute top-[3em] md:top-[2em] md:mr-4 pt-4 md:pt-0 flex justify-center md:w-[40%] bg-secondary md:bg-transparent" >
+      <div className="relative grid grid-cols-5 w-full">
+        <div className="absolute top-0 h-[16.2em] md:h-[8.5rem] w-full bg-secondary border-b-[0.4em] border-stone-600" />
+        <div className="col-span-5 md:col-span-2 p-4 md:p-8 flex flex-col items-center md:mr-2 md:bg-stone-50">
           <div className="overflow-hidden bg-stone-600 md:border-[0.4em] border-stone-600 w-[9em] h-[9em] md:h-[12em] md:w-[12em] rounded-full  z-10 ">
             <Image src="/me1.jpg" alt="Samba Carlson" width={360} height={360} className="object-cover h-full transform -scale-x-100" />
           </div>
         </div>
-        <div className="flex justify-center bg-secondary w-full h-[8em] border-b-[0.5em] border-b-stone-600">
-          <div className="text-white md:absolute left-[40%] top-[3em] flex flex-col items-center md:items-start justify-center md:justify-start">
+        <div className="col-span-5 md:col-span-3 p-4 md:p-8 md:pl-0 flex flex-col justify-cente h-full z-10">
+          <div className="flex flex-col items-center md:items-start justify-end flex-1 text-white">
             <h1 className="text-xl md:text-3xl font-bold">Samba Carlson</h1>
             <h3 className="font-bold text-base md:text-md tracking-[0.5em]">SOFTWARE DEVELOPER</h3>
           </div>
-        </div>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-2 md:gap-y-2 md:absolute top-[9.2em] left-[40%] p-4 md:p-0">
-          <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><MdEmail /></span><p>sambacarlson@gmail.com</p></div>
-          <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><PiPhoneCallFill /></span><p>+237677964952</p></div>
-          <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><SiLinkedin /></span><p>linkedin.com/in/sambacarlson</p></div>
-          <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><MdLocationOn /></span><p>Molyko Buea</p></div>
+          <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-8 md:mt-10">
+            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><MdEmail /></span><p>sambacarlson@gmail.com</p></div>
+            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><PiPhoneCallFill /></span><p>+237677964952</p></div>
+            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><SiLinkedin /></span><p>linkedin.com/in/sambacarlson</p></div>
+            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><MdLocationOn /></span><p>Molyko Buea</p></div>
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-5 w-full self-center h-full mt-0 md:mt-[6em] flex-1">
-        <div className="col-span-5 md:col-span-2 w-full flex flex-col p-4 md:p-8">
+      <div className="grid grid-cols-5 w-full self-center h-full mt-0 md:mt-[6em], flex-1">
+        <div className="col-span-5 md:col-span-2  flex flex-col p-4 md:p-8 md:mr-2 md:bg-stone-50">
           <div className="hidden md:flex flex-col">
             <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">Profile</h3>
             <p className="my-2">{profileText}</p>
