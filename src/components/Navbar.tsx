@@ -16,7 +16,7 @@ const Navbar = () => {
           <div onClick={()=>{setShowMenu(prevState=>!prevState)}} className="w-full flex items-end py-2 hover:underline duration-300 hover:cursor-pointer"><Link href="#contact">Contact</Link> </div>
       </div>
       <div className="hidden md:flex">
-        <div onClick={()=>{}} className="px-5 bg-white py-1 text-primary self-center hover:text-white hover:bg-primary hover:ring-1 ring-white  duration-200 hover:cursor-pointer rounded"><Link href="">Resume</Link></div>
+        <div onClick={() => { }} className="px-5 bg-white py-1 text-primary self-center hover:text-white hover:bg-primary hover:ring-1 ring-white  duration-200 hover:cursor-pointer rounded"><Link href="/resume">Resume</Link></div>
       </div>
       <div onClick={()=>{setShowMenu(prevState => !prevState)}} className="md:hidden flex flex-row items-center justify-center text-white">
         {

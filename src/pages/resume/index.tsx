@@ -3,18 +3,18 @@ import { SiLinkedin } from 'react-icons/si'
 import { PiPhoneCallFill } from 'react-icons/pi'
 import { MdLocationOn } from 'react-icons/md'
 import Image from 'next/image'
-import { profileText, myEducation, myReference, myExperience, mySkills } from './resumeData'
-import { Education, Experience, Reference, Skill } from './resumeTypes'
+import { profileText, myEducation, myReference, myExperience, mySkills } from "@/data/resumeData/resumeData"
+import { Education, Experience, Reference, Skill } from '@/types/resumeTypes'
 
 
 
 export default function Resume() {
   return (
-    <main className="flex flex-col items-center text-primary w-full lg:max-w-[1000px] min-h-[1000px] mx-auto font-gothic">
+    <main className="flex flex-col items-center text-primary w-full lg:max-w-[1000px] min-h-[1000px] mx-auto font-gothic border">
       <div className="flex flex-col w-full relative">
-        <div className="md:absolute top-[3em] md:mr-4 pt-4 md:pt-0 flex justify-center md:w-[40%] bg-secondary md:bg-transparent" >
-          <div className="overflow-hidden bg-stone-600 md:border-[0.4em] border-stone-600 w-[9em] h-[9em] md:h-[10em] md:w-[10em] rounded-full md:rounded-none z-10 ">
-            <Image src="/me1.jpg" alt="Samba Carlson" width={350} height={350} className="object-cover h-full transform -scale-x-100" />
+        <div className="md:absolute top-[3em] md:top-[2em] md:mr-4 pt-4 md:pt-0 flex justify-center md:w-[40%] bg-secondary md:bg-transparent" >
+          <div className="overflow-hidden bg-stone-600 md:border-[0.4em] border-stone-600 w-[9em] h-[9em] md:h-[12em] md:w-[12em] rounded-full  z-10 ">
+            <Image src="/me1.jpg" alt="Samba Carlson" width={360} height={360} className="object-cover h-full transform -scale-x-100" />
           </div>
         </div>
         <div className="flex justify-center bg-secondary w-full h-[8em] border-b-[0.5em] border-b-stone-600">
@@ -86,15 +86,15 @@ export default function Resume() {
 
 const Experience = ({ exp }: { exp: Experience }) => {
   return (
-    <div className="grid grid-cols-4 my-2">
-      <em className="col-span-4 md:col-span-1 text-secondary text-sm">{exp.date}</em>
-      <div className="col-span-4 md:col-span-3 flex flex-col">
+    <div className="grid grid-cols-5 my-2">
+      <em className="col-span-5 md:col-span-1 text-secondary text-sm">{exp.date}</em>
+      <div className="col-span-5 md:col-span-4 flex flex-col">
         <div className="flex flex-row">
           <h4 className="font-bold text-lg">{exp.title} </h4>
           <span className="mx-4 md:mx-12 font-sm font-semibold italic">{exp.company}</span>
         </div>
         <p className="pr-4 md:pr-8 ">{exp.activities.overview}</p>
-        <ul className="list-disc list-outside pl-[1.2em] text-">
+        <ul className="list-disc list-outside pl-[0.9em]">
           {exp.activities.highlights.map((item: string) => (
             <li key={item} className="text-secondary"><span className="text-primary">{item}</span></li>
           ))}
