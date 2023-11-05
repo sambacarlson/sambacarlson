@@ -9,10 +9,14 @@ import { Education, Experience, Reference, Skill } from '@/types/resumeTypes'
 
 
 export default function Resume() {
+  const downloadPDF = () => {
+    console.log('download resume pdf')
+  };
   return (
     <main className="flex flex-col items-center text-primary w-full lg:max-w-[1000px] min-h-[1000px] mx-auto font-gothic border">
+      <h4 onClick={downloadPDF} className="fixed right-[5%] top-10 rounded-lg py-2 px-4 hover:cursor-pointer z-20 border-2 text-sm border-yellow-400 text-yellow-400 bg-emerald-900 animate-pulse hover:animate-none duration-300 hover:border-white active:border-yellow-400 active:bg-emerald-700">Download PDF</h4>
       <div className="relative grid grid-cols-5 w-full">
-        <div className="absolute top-0 h-[16.2em] md:h-[8.5rem] w-full bg-secondary border-b-[0.4em] border-stone-600" />
+        <div className="absolute top-0 h-[17em] md:h-[8.5rem] w-full bg-secondary border-b-[0.4em] border-stone-600" />
         <div className="col-span-5 md:col-span-2 p-4 md:p-8 flex flex-col items-center md:mr-2 md:bg-stone-50">
           <div className="overflow-hidden bg-stone-600 md:border-[0.4em] border-stone-600 w-[9em] h-[9em] md:h-[12em] md:w-[12em] rounded-full  z-10 ">
             <Image src="/me1.jpg" alt="Samba Carlson" width={360} height={360} className="object-cover h-full transform -scale-x-100" />
@@ -21,7 +25,7 @@ export default function Resume() {
         <div className="col-span-5 md:col-span-3 p-4 md:p-8 md:pl-0 flex flex-col justify-cente h-full z-10">
           <div className="flex flex-col items-center md:items-start justify-end flex-1 text-white">
             <h1 className="text-xl md:text-3xl font-bold">Samba Carlson</h1>
-            <h3 className="font-bold text-base md:text-md tracking-[0.5em]">SOFTWARE DEVELOPER</h3>
+            <h3 className="font-bold text-base md:text-md tracking-[0.5em] text-center">SOFTWARE DEVELOPER</h3>
           </div>
           <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-8 md:mt-10">
             <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><MdEmail /></span><p>sambacarlson@gmail.com</p></div>
