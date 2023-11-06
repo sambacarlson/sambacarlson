@@ -13,8 +13,8 @@ export default function Resume() {
     console.log('download resume pdf')
   };
   return (
-    <main className="flex flex-col items-center text-primary w-full lg:max-w-[1000px] min-h-[1000px] mx-auto font-gothic border">
-      <h4 onClick={downloadPDF} className="fixed right-[5%] top-10 rounded-lg py-2 px-4 hover:cursor-pointer z-20 border-2 text-sm border-yellow-400 text-yellow-400 bg-emerald-900 animate-pulse hover:animate-none duration-300 hover:border-white active:border-yellow-400 active:bg-emerald-700">Download PDF</h4>
+    <main className="flex flex-col items-center text-primary w-full lg:max-w-[1000px] min-h-[1000px] mx-auto font-gothic">
+      <h4 onClick={downloadPDF} className="hidden fixed right-[5%] top-10 rounded-lg py-2 px-4 hover:cursor-pointer z-20 border-2 text-sm border-yellow-400 text-yellow-400 bg-emerald-900 animate-pulse hover:animate-none duration-300 hover:border-white active:border-yellow-400 active:bg-emerald-700">Download PDF</h4>
       <div className="relative grid grid-cols-5 w-full">
         <div className="absolute top-0 h-[17em] md:h-[8.5rem] w-full bg-secondary border-b-[0.4em] border-stone-600" />
         <div className="col-span-5 md:col-span-2 p-4 md:p-8 flex flex-col items-center md:mr-2 md:bg-stone-50">
