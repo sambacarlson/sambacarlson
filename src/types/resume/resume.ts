@@ -1,4 +1,4 @@
-export interface Experience {
+export interface ExperienceType {
   date: string,
   title: string,
   company: string,
@@ -6,34 +6,34 @@ export interface Experience {
     overview: string,
     highlights: string[]
   }
-  specialty?: Specialty,
+  specialty?: SpecialtyType,
 }
 
-export interface Education {
+export interface EducationType {
   date: string,
   school: string,
   degree: string,
   details: string
-  specialty?: Specialty,
+  specialty?: SpecialtyType,
 }
 
-export interface Reference {
+export interface ReferenceType {
   name: string,
   org: string,
   email: string
-  specialty?: Specialty,
+  specialty?: SpecialtyType,
 }
 
-export interface Skill {
+export interface SkillType {
   class: string,
   skills: {
     title: string,
     score: number
   }[],
-  specialty?: Specialty,
+  specialty?: SpecialtyType,
 }
 
-interface Specialty {
+interface SpecialtyType {
   specialty: "development" | "teaching" | "design" | "it support",
   strength?: 1 | 2 | 3
 }

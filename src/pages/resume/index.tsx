@@ -3,10 +3,8 @@ import { SiLinkedin } from 'react-icons/si'
 import { PiPhoneCallFill } from 'react-icons/pi'
 import { MdLocationOn } from 'react-icons/md'
 import Image from 'next/image'
-import { profileText, myEducation, myReference, myExperience, mySkills } from "@/data/resumeData/resumeData"
-import { Education, Experience, Reference, Skill } from '@/types/resumeTypes'
-
-
+import { myProfileText, mySkills, myEducation, myReference, myExperience } from '@/data'
+import { EducationType, ReferenceType, ExperienceType, SkillType } from '@/types'
 
 export default function Resume() {
   const downloadPDF = () => {
@@ -24,14 +22,14 @@ export default function Resume() {
         </div>
         <div className="col-span-5 md:col-span-3 p-4 md:p-8 md:pl-0 flex flex-col justify-cente h-full z-10">
           <div className="flex flex-col items-center md:items-start justify-end flex-1 text-white">
-            <h1 className="text-xl md:text-3xl font-bold">Samba Carlson</h1>
-            <h3 className="font-bold text-base md:text-md tracking-[0.5em] text-center">SOFTWARE DEVELOPER</h3>
+            <h1 className="text-xl md:text-3xl font-bold">Kwahnwe Samba Carlson</h1>
+            <h3 className="font-bold text-base md:text-md tracking-[0.5em] text-center">SOFTWARE ENGINEER</h3>
           </div>
           <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-8 md:mt-10">
             <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><MdEmail /></span><p>sambacarlson@gmail.com</p></div>
             <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><PiPhoneCallFill /></span><p>+237677964952</p></div>
             <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><SiLinkedin /></span><p>linkedin.com/in/sambacarlson</p></div>
-            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><MdLocationOn /></span><p>Molyko Buea</p></div>
+            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><MdLocationOn /></span><p>Molyko, Buea Cameroon</p></div>
           </div>
         </div>
       </div>
@@ -39,7 +37,7 @@ export default function Resume() {
         <div className="col-span-5 md:col-span-2  flex flex-col p-4 md:p-8 md:mr-2 md:bg-stone-50">
           <div className="hidden md:flex flex-col">
             <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">Profile</h3>
-            <p className="my-2">{profileText}</p>
+            <p className="my-2">{myProfileText}</p>
           </div>
           <div className="flex flex-col">
             <h3 className="font-bold text-xl text-secondary mt-0 md:mt-4 border-b border-secondaryLight ">Skills</h3>
@@ -53,7 +51,7 @@ export default function Resume() {
             <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">Education</h3>
             <div className="flex flex-col my-2">
               {
-                myEducation.map((ed: Education) => (
+                myEducation.map((ed: EducationType) => (
                   <Education key={ed.school + ed.degree} edu={{ date: ed.date, school: ed.school, degree: ed.degree, details: ed.details }} />
                 ))
               }
@@ -63,7 +61,7 @@ export default function Resume() {
             <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">Refereces</h3>
             <div className="my-2 flex-col space-y-2">
               {
-                myReference.map((rf: Reference) => (
+                myReference.map((rf: ReferenceType) => (
                   <Reference key={rf.name + rf.email} reference={{ name: rf.name, org: rf.org, email: rf.email }} />
                 ))
               }
@@ -73,12 +71,12 @@ export default function Resume() {
         <div className="col-span-5 order-first md:order-last md:col-span-3 w-full p-4 md:p-8 md:pl-0">
           <div className="flex md:hidden flex-col">
             <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">Profile</h3>
-            <p className="">{profileText}</p>
+            <p className="">{myProfileText}</p>
           </div>
           <h3 className="font-bold text-xl text-secondary mt-8 md:mt-0 border-b border-secondaryLight">Experience</h3>
           <div className="flex flex-col space-y-4">
             {
-              myExperience.map((ex: Experience) => (
+              myExperience.map((ex: ExperienceType) => (
                 <Experience key={ex.date} exp={{ date: ex.date, title: ex.title, company: ex.company, activities: { overview: ex.activities.overview, highlights: [...ex.activities.highlights] } }} />
               ))
             }
@@ -89,7 +87,7 @@ export default function Resume() {
   )
 }
 
-const Experience = ({ exp }: { exp: Experience }) => {
+const Experience = ({ exp }: { exp: ExperienceType }) => {
   return (
     <div className="grid grid-cols-5 my-2">
       <em className="col-span-5 md:col-span-1 text-secondary text-sm">{exp.date}</em>
@@ -109,7 +107,7 @@ const Experience = ({ exp }: { exp: Experience }) => {
   )
 }
 
-const Education = ({ edu }: { edu: Education }) => {
+const Education = ({ edu }: { edu: EducationType }) => {
   return (
     <div className="flex flex-col mb-4">
       <div className="flex flex-row space-x-4">
@@ -124,7 +122,7 @@ const Education = ({ edu }: { edu: Education }) => {
   )
 }
 
-const Reference = ({ reference }: { reference: Reference }) => {
+const Reference = ({ reference }: { reference: ReferenceType }) => {
   return (
     <div className="flex flex-col">
       <h4 className="font-bold">{reference.name}</h4>
@@ -134,7 +132,7 @@ const Reference = ({ reference }: { reference: Reference }) => {
   )
 }
 
-const Skill = ({ skill }: { skill: Skill }) => {
+const Skill = ({ skill }: { skill: SkillType }) => {
   return (
     <div className="flex flex-col my-2">
       <h4 className="font-bold">{skill.class}</h4>
@@ -142,7 +140,7 @@ const Skill = ({ skill }: { skill: Skill }) => {
         {
           skill.skills.map(skill => (
             <div key={skill.title + skill.score} className="flex flex-row justify-between gap-4">
-              <li className="font-sm italic"><span className="text-secondary">{skill.title}</span></li>
+              <li className="font-sm italic"><span className="text-secondary text-sm">{skill.title}</span></li>
               <Score score={skill.score} />
             </div>
           ))
