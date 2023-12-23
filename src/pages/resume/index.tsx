@@ -11,7 +11,7 @@ export default function Resume() {
     console.log('download resume pdf')
   };
   return (
-    <main className="flex flex-col items-center text-primary w-full lg:max-w-[1000px] min-h-[1000px] mx-auto font-gothic">
+    <main className="flex flex-col items-center text-primary w-full max-w-[750px] min-h-[1000px] mx-auto font-gothic leading-6 border border-stone-100">
       <h4 onClick={downloadPDF} className="hidden fixed right-[5%] top-10 rounded-lg py-2 px-4 hover:cursor-pointer z-20 border-2 text-sm border-yellow-400 text-yellow-400 bg-emerald-900 animate-pulse hover:animate-none duration-300 hover:border-white active:border-yellow-400 active:bg-emerald-700">Download PDF</h4>
       <div className="relative grid grid-cols-5 w-full">
         <div className="absolute top-0 h-[17em] md:h-[8.5rem] w-full bg-secondary border-b-[0.4em] border-stone-600" />
@@ -20,21 +20,21 @@ export default function Resume() {
             <Image src="/me1.jpg" alt="Samba Carlson" width={360} height={360} className="object-cover h-full transform -scale-x-100" />
           </div>
         </div>
-        <div className="col-span-5 md:col-span-3 p-4 md:p-8 md:pl-0 flex flex-col justify-cente h-full z-10">
-          <div className="flex flex-col items-center md:items-start justify-end flex-1 text-white">
+        <div className="col-span-5 md:col-span-3 p-4 md:p-0 md:space-y-5 md:pb-10 flex flex-col h-full justify-end z-10">
+          <div className="flex flex-col items-center md:items-start justify-end flex-1 text-white md:pb-2 ">
             <h1 className="text-xl md:text-3xl font-bold">Kwahnwe Samba Carlson</h1>
             <h3 className="font-bold text-base md:text-md tracking-[0.5em] text-center">SOFTWARE ENGINEER</h3>
           </div>
-          <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-8 md:mt-10">
-            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><MdEmail /></span><p>sambacarlson@gmail.com</p></div>
-            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><PiPhoneCallFill /></span><p>+237677964952</p></div>
-            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><SiLinkedin /></span><p>linkedin.com/in/sambacarlson</p></div>
-            <div className="flex flex-row gap-x-3 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><MdLocationOn /></span><p>Molyko, Buea Cameroon</p></div>
+          <div className="grid grid-cols-2 gap-x-5 gap-y-2 mt-8 md:mt-0 text-[15px]">
+            <div className="flex flex-row gap-x-1 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><MdEmail /></span><p>sambacarlson@gmail.com</p></div>
+            <div className="flex flex-row gap-x-1 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><PiPhoneCallFill /></span><p>+237677964952</p></div>
+            <div className="flex flex-row gap-x-1 col-span-2 md:col-span-1 break-all"><span className="text-secondary pt-[0.4rem]"><SiLinkedin /></span><p>linkedin.com/in/sambacarlson</p></div>
+            <div className="flex flex-row gap-x-1 col-span-2 md:col-span-1"><span className="text-secondary pt-[0.4rem]"><MdLocationOn /></span><p>Molyko, Buea Cameroon</p></div>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-5 w-full self-center h-full mt-0 md:mt-[6em], flex-1">
-        <div className="col-span-5 md:col-span-2  flex flex-col p-4 md:p-8 md:mr-2 md:bg-stone-50">
+      <div className="grid grid-cols-5 w-full self-center h-full mt-0 flex-1">
+        <div className="col-span-5 md:col-span-2  flex flex-col p-4 md:p-8 md:pt-0 md:mr-2 md:bg-stone-50">
           <div className="hidden md:flex flex-col">
             <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">Profile</h3>
             <p className="my-2">{myProfileText}</p>
@@ -68,7 +68,7 @@ export default function Resume() {
             </div>
           </div>
         </div>
-        <div className="col-span-5 order-first md:order-last md:col-span-3 w-full p-4 md:p-8 md:pl-0">
+        <div className="col-span-5 order-first md:order-last md:col-span-3 w-full p-4 md:p-8 md:pl-0 md:pt-0">
           <div className="flex md:hidden flex-col">
             <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">Profile</h3>
             <p className="">{myProfileText}</p>
@@ -109,7 +109,7 @@ const Experience = ({ exp }: { exp: ExperienceType }) => {
 
 const Education = ({ edu }: { edu: EducationType }) => {
   return (
-    <div className="flex flex-col mb-4">
+    <div className="flex flex-col mb-2">
       <div className="flex flex-row space-x-4">
         <div className="flex flex-col">
           <h4 className="font-bold">{edu.school}</h4>
@@ -136,11 +136,11 @@ const Skill = ({ skill }: { skill: SkillType }) => {
   return (
     <div className="flex flex-col my-2">
       <h4 className="font-bold">{skill.class}</h4>
-      <ul className="list-disc list-inside">
+      <ul className="list-disc list-inside"> 
         {
           skill.skills.map(skill => (
-            <div key={skill.title + skill.score} className="flex flex-row justify-between gap-4">
-              <li className="font-sm italic"><span className="text-secondary text-sm">{skill.title}</span></li>
+            <div key={skill.title + skill.score} className="flex flex-row justify-between gap-2">
+              <li className="font-sm italic"><span className="-ml-3 text-secondary text-sm">{skill.title}</span></li>
               <Score score={skill.score} />
             </div>
           ))
