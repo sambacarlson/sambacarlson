@@ -1,10 +1,4 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import Hero from '@/components/Hero'
-import Projects from '@/components/Projects'
-import Experience from '@/components/Experience'
+import { Experience, Footer, Hero, Navbar, Projects } from '@/components/organisms'
 
 export default function Home() {
   return (
