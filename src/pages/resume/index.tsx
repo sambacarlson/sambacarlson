@@ -3,8 +3,9 @@ import { SiLinkedin } from 'react-icons/si'
 import { PiPhoneCallFill } from 'react-icons/pi'
 import { MdLocationOn } from 'react-icons/md'
 import Image from 'next/image'
-import { myProfileText, mySkills, myEducation, myReference, myExperience } from '@/data'
-import { EducationType, ReferenceType, ExperienceType, SkillType } from '@/types'
+import Link from 'next/link'
+import { myProfileText, mySkills, myEducation, myReference, myExperience, myLinks } from '@/data'
+import { EducationType, ReferenceType, ExperienceType, SkillType, LinksType } from '@/types'
 
 export default function Resume() {
   const downloadPDF = () => {
@@ -49,7 +50,7 @@ export default function Resume() {
           </div>
           <div className="flex flex-col">
             <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">Education</h3>
-            <div className="flex flex-col my-2">
+            <div className="flex flex-col">
               {
                 myEducation.map((ed: EducationType) => (
                   <Education key={ed.school + ed.degree} edu={{ date: ed.date, school: ed.school, degree: ed.degree, details: ed.details }} />
@@ -67,19 +68,41 @@ export default function Resume() {
               }
             </div>
           </div>
-        </div>
-        <div className="col-span-5 order-first md:order-last md:col-span-3 w-full p-4 md:p-8 md:pl-0 md:pt-0">
-          <div className="flex md:hidden flex-col">
-            <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">Profile</h3>
-            <p className="">{myProfileText}</p>
+          <div className="flex flex-col w-full md:hidden">
+            <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">Links</h3>
+            <div className="flex flex-col">
+              {
+                myLinks.map((ln: LinksType) => (
+                  <Links key={ln.ref} lnk={{ title: ln.title, ref: ln.ref }} />
+                ))
+              }
+            </div>
           </div>
-          <h3 className="font-bold text-xl text-secondary mt-8 md:mt-0 border-b border-secondaryLight">Experience</h3>
-          <div className="flex flex-col space-y-4">
-            {
-              myExperience.map((ex: ExperienceType) => (
-                <Experience key={ex.date} exp={{ date: ex.date, title: ex.title, company: ex.company, activities: { overview: ex.activities.overview, highlights: [...ex.activities.highlights] } }} />
-              ))
-            }
+        </div>
+        <div className="col-span-5 order-first md:order-last md:col-span-3 w-full p-4 md:p-8 md:pl-0 md:pt-0 flex flex-col">
+          <div className="">
+            <div className="flex md:hidden flex-col">
+              <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">Profile</h3>
+              <p className="">{myProfileText}</p>
+            </div>
+            <h3 className="font-bold text-xl text-secondary mt-8 md:mt-0 border-b border-secondaryLight">Experience</h3>
+            <div className="flex flex-col space-y-4">
+              {
+                myExperience.map((ex: ExperienceType) => (
+                  <Experience key={ex.date} exp={{ date: ex.date, title: ex.title, company: ex.company, activities: { overview: ex.activities.overview, highlights: [...ex.activities.highlights] } }} />
+                ))
+              }
+            </div>
+          </div>
+          <div className="hidden md:flex flex-col w-full">
+            <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">Links</h3>
+            <div className="flex flex-col">
+              {
+                myLinks.map((ln: LinksType) => (
+                  <Links key={ln.ref} lnk={{ title: ln.title, ref: ln.ref }} />
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>
@@ -109,7 +132,7 @@ const Experience = ({ exp }: { exp: ExperienceType }) => {
 
 const Education = ({ edu }: { edu: EducationType }) => {
   return (
-    <div className="flex flex-col mb-2">
+    <div className="flex flex-col my-2">
       <div className="flex flex-row space-x-4">
         <div className="flex flex-col">
           <h4 className="font-bold">{edu.school}</h4>
@@ -136,11 +159,11 @@ const Skill = ({ skill }: { skill: SkillType }) => {
   return (
     <div className="flex flex-col my-2">
       <h4 className="font-bold">{skill.class}</h4>
-      <ul className="list-disc list-inside"> 
+      <ul className="list-disc list-inside">
         {
           skill.skills.map(skill => (
             <div key={skill.title + skill.score} className="flex flex-row justify-between gap-2">
-              <li className="font-sm italic"><span className="-ml-3 text-secondary text-sm">{skill.title}</span></li>
+              <li className="font-sm italic"><span className="-ml-1 text-secondary text-sm">{skill.title}</span></li>
               <Score score={skill.score} />
             </div>
           ))
@@ -155,6 +178,15 @@ const Score = ({ score }: { score: number }) => {
   return (
     <div className="flex w-full max-w-[100px] h-2 bg-secondaryLight self-center rounded-e-md">
       <div style={{ width: `${score * 10}%` }} className="h-full bg-secondary rounded-e-md"></div>
+    </div>
+  )
+}
+
+const Links = ({ lnk }: { lnk: LinksType }) => {
+  return (
+    <div className="grid grid-cols-5 items-center my-1">
+      <h5 className="font-bold text-md">{lnk.title}{":"}</h5>
+      <Link className="col-span-3 text-secondary" href={lnk.ref} target='_blank'>{lnk.ref}</Link>
     </div>
   )
 }

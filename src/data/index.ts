@@ -1,5 +1,5 @@
 import { myCoverLetter } from "./coverLetter/coverLetter";
-import { myProfileText, myEducation, myExperience, myReference, mySkills } from "./resume/resume";
+import { myProfileText, myEducation, myExperience, myReference, mySkills, myLinks } from "./resume/resume";
 
 export {
   myProfileText,
@@ -8,4 +8,5 @@ export {
   myReference,
   mySkills,
   myCoverLetter,
+  myLinks,
 }

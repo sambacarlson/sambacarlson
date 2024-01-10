@@ -1,4 +1,4 @@
-import { ExperienceType, EducationType, ReferenceType, SkillType } from "@/types/resume/resume";
+import { ExperienceType, EducationType, ReferenceType, SkillType, LinksType } from "@/types/resume/resume";
 import { CoverLetterType } from "./coverLetter/coverLetter";
 
 export type {
@@ -7,4 +7,5 @@ export type {
   ReferenceType,
   SkillType,
   CoverLetterType,
+  LinksType,
 }

@@ -33,6 +33,11 @@ export interface SkillType {
   specialty?: SpecialtyType,
 }
 
+export interface LinksType {
+  title: string,
+  ref: string
+}
+
 interface SpecialtyType {
   specialty: "development" | "teaching" | "design" | "it support",
   strength?: 1 | 2 | 3
