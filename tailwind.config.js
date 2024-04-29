@@ -14,8 +14,9 @@ module.exports = {
       },
       colors: {
         primary: "#222020",
-        secondary: "#08b085",
-        secondaryLight: "#08b08530"
+        // secondary: "#08b085",
+        secondary: "#00a045",
+        secondaryLight: "#08b08530",
       },
       dropShadow: {
         light: "-2px -2px 5px rgba(0, 0, 0, 0.3)",
@@ -25,8 +26,17 @@ module.exports = {
         ],
       },
       fontFamily: {
-        gothic: ['Didact Gothic', 'sans-serif']
-      }
+        gothic: ["Didact Gothic", "sans-serif"],
+      },
+    },
+    screens: {
+      mobile: "480px",
+      tablet: "640px",
+      laptop: "1024px",
+      desktop: "1280px",
+    },
+    animation: {
+      "spin-slow": "spin 3s linear infinite",
     },
   },
   plugins: [],
