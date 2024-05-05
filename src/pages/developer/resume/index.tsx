@@ -1,9 +1,9 @@
-import { MdEmail } from 'react-icons/md'
-import { SiLinkedin } from 'react-icons/si'
-import { PiPhoneCallFill } from 'react-icons/pi'
-import { MdLocationOn } from 'react-icons/md'
-import Image from 'next/image'
-import Link from 'next/link'
+import { MdEmail } from "react-icons/md";
+import { SiLinkedin } from "react-icons/si";
+import { PiPhoneCallFill } from "react-icons/pi";
+import { MdLocationOn } from "react-icons/md";
+import Image from "next/image";
+import Link from "next/link";
 import {
   myProfileText2,
   mySkills,
@@ -33,9 +33,9 @@ export default function Resume() {
         Download PDF
       </h4>
       <div className="relative grid grid-cols-5 w-full">
-        <div className="absolute top-0 h-[17em] md:h-[8.5rem] w-full bg-secondary border-b-[0.4em] border-stone-600" />
-        <div className="col-span-5 md:col-span-2 p-4 md:p-8 flex flex-col items-center md:mr-2 md:bg-stone-50">
-          <div className="overflow-hidden bg-stone-600 md:border-[0.4em] border-stone-600 w-[9em] h-[9em] md:h-[12em] md:w-[12em] rounded-full  z-10 ">
+        <div className="absolute top-0 h-[17em] tablet:h-[8.5rem] w-full bg-secondary border-b-[0.4em] border-stone-600" />
+        <div className="col-span-5 tablet:col-span-2 p-4 tablet:p-8 flex flex-col items-center tablet:mr-2 tablet:bg-stone-50">
+          <div className="overflow-hidden bg-stone-600 tablet:border-[0.4em] border-stone-600 w-[9em] h-[9em] tablet:h-[12em] tablet:w-[12em] rounded-full  z-10 ">
             <Image
               src="/me1.jpg"
               alt="Samba Carlson"
@@ -45,35 +45,35 @@ export default function Resume() {
             />
           </div>
         </div>
-        <div className="col-span-5 md:col-span-3 p-4 md:p-0 md:space-y-5 md:pb-10 flex flex-col h-full justify-end z-10">
-          <div className="flex flex-col items-center md:items-start justify-end flex-1 text-white md:pb-2 ">
-            <h1 className="text-xl md:text-3xl font-bold">
+        <div className="col-span-5 tablet:col-span-3 p-4 tablet:p-0 tablet:space-y-5 tablet:pb-10 flex flex-col h-full justify-end z-10">
+          <div className="flex flex-col items-center tablet:items-start justify-end flex-1 text-white tablet:pb-2 ">
+            <h1 className="text-xl tablet:text-3xl font-bold">
               Kwahnwe Samba Carlson
             </h1>
-            <h3 className="font-bold text-base md:text-md tracking-[0.5em] text-center">
+            <h3 className="font-bold text-base tablet:text-md tracking-[0.5em] text-center">
               SOFTWARE ENGINEER
             </h3>
           </div>
-          <div className="grid grid-cols-2 gap-x-5 gap-y-2 mt-8 md:mt-0 text-[15px]">
-            <div className="flex flex-row gap-x-1 col-span-2 md:col-span-1 break-all">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-2 mt-8 tablet:mt-0 text-[15px]">
+            <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1 break-all">
               <span className="text-secondary pt-[0.4rem]">
                 <MdEmail />
               </span>
               <p>sambacarlson@gmail.com</p>
             </div>
-            <div className="flex flex-row gap-x-1 col-span-2 md:col-span-1">
+            <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1">
               <span className="text-secondary pt-[0.4rem]">
                 <PiPhoneCallFill />
               </span>
               <p>+237677964952</p>
             </div>
-            <div className="flex flex-row gap-x-1 col-span-2 md:col-span-1 break-all">
+            <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1 break-all">
               <span className="text-secondary pt-[0.4rem]">
                 <SiLinkedin />
               </span>
               <p>linkedin.com/in/sambacarlson</p>
             </div>
-            <div className="flex flex-row gap-x-1 col-span-2 md:col-span-1">
+            <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1">
               <span className="text-secondary pt-[0.4rem]">
                 <MdLocationOn />
               </span>
@@ -83,15 +83,15 @@ export default function Resume() {
         </div>
       </div>
       <div className="grid grid-cols-5 w-full self-center h-full mt-0 flex-1">
-        <div className="col-span-5 md:col-span-2  flex flex-col p-4 md:p-8 md:pt-0 md:mr-2 md:bg-stone-50">
-          <div className="hidden md:flex flex-col">
+        <div className="col-span-5 tablet:col-span-2  flex flex-col p-4 tablet:p-8 tablet:pt-0 tablet:mr-2 tablet:bg-stone-50">
+          <div className="hidden tablet:flex flex-col">
             <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">
               Profile
             </h3>
             <p className="my-2">{myProfileText2}</p>
           </div>
           <div className="flex flex-col">
-            <h3 className="font-bold text-xl text-secondary mt-0 md:mt-4 border-b border-secondaryLight ">
+            <h3 className="font-bold text-xl text-secondary mt-0 tablet:mt-4 border-b border-secondaryLight ">
               Skills
             </h3>
             {mySkills.map((skill) => (
@@ -102,7 +102,7 @@ export default function Resume() {
             ))}
           </div>
           <div className="flex flex-col">
-            <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">
+            <h3 className="font-bold text-xl text-secondary mt-8 tablet:mt-4 border-b border-secondaryLight">
               Education
             </h3>
             <div className="flex flex-col">
@@ -120,7 +120,7 @@ export default function Resume() {
             </div>
           </div>
           <div className="flex flex-col">
-            <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">
+            <h3 className="font-bold text-xl text-secondary mt-8 tablet:mt-4 border-b border-secondaryLight">
               Refereces
             </h3>
             <div className="my-2 flex-col space-y-2">
@@ -131,8 +131,8 @@ export default function Resume() {
                 />
               ))}
             </div>
-            <div className="hidden md:flex flex-col w-full">
-              <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">
+            <div className="hidden tablet:flex flex-col w-full">
+              <h3 className="font-bold text-xl text-secondary mt-8 tablet:mt-4 border-b border-secondaryLight">
                 Links
               </h3>
               <div className="flex flex-col">
@@ -142,8 +142,8 @@ export default function Resume() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full md:hidden">
-            <h3 className="font-bold text-xl text-secondary mt-8 md:mt-4 border-b border-secondaryLight">
+          <div className="flex flex-col w-full tablet:hidden">
+            <h3 className="font-bold text-xl text-secondary mt-8 tablet:mt-4 border-b border-secondaryLight">
               Links
             </h3>
             <div className="flex flex-col">
@@ -153,15 +153,15 @@ export default function Resume() {
             </div>
           </div>
         </div>
-        <div className="col-span-5 order-first md:order-last md:col-span-3 w-full p-4 md:p-8 md:pl-0 md:pt-0 flex flex-col">
+        <div className="col-span-5 order-first tablet:order-last tablet:col-span-3 w-full p-4 tablet:p-8 tablet:pl-0 tablet:pt-0 flex flex-col">
           <div className="">
-            <div className="flex md:hidden flex-col">
+            <div className="flex tablet:hidden flex-col">
               <h3 className="font-bold text-xl text-secondary border-b border-secondaryLight">
                 Profile
               </h3>
               <p className="">{myProfileText2}</p>
             </div>
-            <h3 className="font-bold text-xl text-secondary mt-8 md:mt-0 border-b border-secondaryLight">
+            <h3 className="font-bold text-xl text-secondary mt-8 tablet:mt-0 border-b border-secondaryLight">
               Experience
             </h3>
             <div className="flex flex-col space-y-4">
@@ -190,22 +190,28 @@ export default function Resume() {
 const Experience = ({ exp }: { exp: ExperienceType }) => {
   return (
     <div className="grid grid-cols-5 my-2">
-      <em className="col-span-5 md:col-span-1 text-secondary text-sm">{exp.date}</em>
-      <div className="col-span-5 md:col-span-4 flex flex-col">
+      <em className="col-span-5 tablet:col-span-1 text-secondary text-sm">
+        {exp.date}
+      </em>
+      <div className="col-span-5 tablet:col-span-4 flex flex-col">
         <div className="flex flex-row">
           <h4 className="font-bold text-lg">{exp.title} </h4>
-          <span className="mx-4 md:mx-12 font-sm font-semibold italic">{exp.company}</span>
+          <span className="mx-4 tablet:mx-12 font-sm font-semibold italic">
+            {exp.company}
+          </span>
         </div>
-        <p className="pr-4 md:pr-8 ">{exp.activities.overview}</p>
+        <p className="pr-4 tablet:pr-8 ">{exp.activities.overview}</p>
         <ul className="list-disc list-outside pl-[0.9em]">
           {exp.activities.highlights.map((item: string) => (
-            <li key={item} className="text-secondary"><span className="text-primary">{item}</span></li>
+            <li key={item} className="text-secondary">
+              <span className="text-primary">{item}</span>
+            </li>
           ))}
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Education = ({ edu }: { edu: EducationType }) => {
   return (
@@ -219,8 +225,8 @@ const Education = ({ edu }: { edu: EducationType }) => {
       </div>
       <p className="">{edu.details}</p>
     </div>
-  )
-}
+  );
+};
 
 const Reference = ({ reference }: { reference: ReferenceType }) => {
   return (
@@ -229,35 +235,42 @@ const Reference = ({ reference }: { reference: ReferenceType }) => {
       <p className="">{reference.org}</p>
       <em className="text-secondary">{reference.email}</em>
     </div>
-  )
-}
+  );
+};
 
 const Skill = ({ skill }: { skill: SkillType }) => {
   return (
     <div className="flex flex-col my-2">
       <h4 className="font-bold">{skill.class}</h4>
       <ul className="list-disc list-inside">
-        {
-          skill.skills.map(skill => (
-            <div key={skill.title + skill.score} className="flex flex-row justify-between gap-2">
-              <li className="font-sm italic"><span className="-ml-1 text-secondary text-sm">{skill.title}</span></li>
-              <Score score={skill.score} />
-            </div>
-          ))
-        }
+        {skill.skills.map((skill) => (
+          <div
+            key={skill.title + skill.score}
+            className="flex flex-row justify-between gap-2"
+          >
+            <li className="font-sm italic">
+              <span className="-ml-1 text-secondary text-sm">
+                {skill.title}
+              </span>
+            </li>
+            <Score score={skill.score} />
+          </div>
+        ))}
       </ul>
     </div>
-  )
-}
-
+  );
+};
 
 const Score = ({ score }: { score: number }) => {
   return (
     <div className="flex w-full max-w-[100px] h-2 bg-secondaryLight self-center rounded-e-md">
-      <div style={{ width: `${score * 10}%` }} className="h-full bg-secondary rounded-e-md"></div>
+      <div
+        style={{ width: `${score * 10}%` }}
+        className="h-full bg-secondary rounded-e-md"
+      ></div>
     </div>
-  )
-}
+  );
+};
 
 const Links = ({ lnk }: { lnk: LinksType }) => {
   return (
@@ -275,4 +288,4 @@ const Links = ({ lnk }: { lnk: LinksType }) => {
       </Link>
     </div>
   );
-}
+};

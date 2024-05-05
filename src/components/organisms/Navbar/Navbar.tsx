@@ -6,12 +6,12 @@ import { Logo } from "@/components/atoms";
 const Navbar = () => {
   const [showMenu, setShowMenu] = React.useState<boolean>(false);
   return (
-    <div className="relative flex flex-row items-center justify-between px-14 py-2 h-[8vh] md:h-[12vh] bg-primary">
+    <div className="relative flex flex-row items-center justify-between px-14 py-2 h-[8vh] tablet:h-[12vh] bg-primary">
       <div className="flex flex-row items-center justify-center">
         {/* <Image src='/sambacarlson-logo-white.png' width={100} height={100} alt="carlson\'s logo" quality={100} className="w-8 h-auto object-contain" /> */}
         <Logo box_size={40} font_size={40} />
       </div>
-      <div className="hidden md:flex flex-row items-center justify-center space-x-6 text-white">
+      <div className="hidden tablet:flex flex-row items-center justify-center space-x-6 text-white">
         <div
           onClick={() => {
             setShowMenu((prevState) => !prevState);
@@ -45,25 +45,19 @@ const Navbar = () => {
           <Link href="#contact">Contact</Link>{" "}
         </div>
       </div>
-      <div className="hidden md:grid grid-cols-2 gap-3">
+      <div className="hidden tablet:grid grid-cols-2 gap-3">
         <div
           onClick={() => {}}
           className="px-5 bg-white py-1 text-center text-primary self-center hover:text-white hover:bg-primary hover:ring-1 ring-white  duration-200 hover:cursor-pointer rounded"
         >
-          <Link href="/resume">Resume</Link>
-        </div>
-        <div
-          onClick={() => {}}
-          className="px-5 bg-white py-1 text-center text-primary self-center hover:text-white hover:bg-primary hover:ring-1 ring-white  duration-200 hover:cursor-pointer rounded"
-        >
-          <Link href="/coverLetter">Cover letter</Link>
+          <Link href="/developer/resume">Resume</Link>
         </div>
       </div>
       <div
         onClick={() => {
           setShowMenu((prevState) => !prevState);
         }}
-        className="md:hidden flex flex-row items-center justify-center text-white"
+        className="tablet:hidden flex flex-row items-center justify-center text-white"
       >
         {!showMenu ? (
           <div className="">
@@ -96,7 +90,7 @@ const Navbar = () => {
         )}
       </div>
       {showMenu && (
-        <div className="absolute top-[8vh] pt-10 left-0 w-2/3 h-[100vh] flex md:hidden flex-col items-start space-y-7 justify-start px-12 text-white bg-primary divide-y">
+        <div className="absolute top-[8vh] pt-10 left-0 w-2/3 h-[100vh] flex tablet:hidden flex-col items-start space-y-7 justify-start px-12 text-white bg-primary divide-y">
           <div
             onClick={() => {
               setShowMenu((prevState) => !prevState);

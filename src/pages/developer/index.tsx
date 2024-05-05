@@ -11,7 +11,7 @@ export default function Developer() {
         <Hero />
       </div>
       {/* Languages and technologies */}
-      <div className="bg-white p-3 md:py-5 md:p-10 md:pl-16 space-y-5 md:space-y-0 flex flex-col md:flex-row md:space-x-8 items-start justify-center border-y border-primary border-opacity-10">
+      {/* <div className="bg-white p-3 md:py-5 md:p-10 md:pl-16 space-y-5 md:space-y-0 flex flex-col md:flex-row md:space-x-8 items-start justify-center border-y border-primary border-opacity-10">
         <div className="md:flex-1">
           <h3 className="text-xl font-semibold">
             Technologies I have been working on include
@@ -36,20 +36,20 @@ export default function Developer() {
             <li>C, Go, R</li>
           </ul>
         </div>
-      </div>
+      </div> */}
       {/* projects */}
-      <div
+      {/* <div
         id="projects"
         className="p-3 md:py-5 md:p-10 md:pl-16 flex flex-col space-y-7 md:space-y-24"
       >
         <Projects />
-      </div>
-      <div
+      </div> */}
+      {/* <div
         id="experience"
         className="bg-white p-3 md:py-5 md:p-10 md:pl-16 flex flex-col space-y-7 md:space-y-24 border-y border-primary border-opacity-10"
       >
         <Experience />
-      </div>
+      </div> */}
 
       <div id="contact" className="">
         <Footer />

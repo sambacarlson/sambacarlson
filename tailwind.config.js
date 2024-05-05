@@ -17,6 +17,11 @@ module.exports = {
         // secondary: "#08b085",
         secondary: "#00a045",
         secondaryLight: "#08b08530",
+        // secondaryDark: "#00a04560",
+        tertiary: "#967bb6", // lavender
+        tertiaryLight: "#e6e6fa", // lavender
+        // tertiaryDark: "#00a04560",
+        // quaternary: "#00a045",
       },
       dropShadow: {
         light: "-2px -2px 5px rgba(0, 0, 0, 0.3)",
