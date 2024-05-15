@@ -20,7 +20,7 @@ const Navbar = ({ profile }: { profile: ProfileType }) => {
   }, [profile]);
 
   const routes: RouteType[] = [
-    { path: "/developer", label: "Home" },
+    { path: "/developer", label: "About" },
     { path: "/developer/work", label: "Work" },
     { path: "/developer/experience", label: "Experience" },
     { path: "/developer/contact", label: "Contact" },
