@@ -20,7 +20,7 @@ const Hero = () => {
             target="new"
             className="text-lg tablet:text-lg"
           >
-            <div className="flex flex-row space-x-3 items-center justify-center px-8 py-2 bg-primary text-white rounded-md hover:text-primary hover:bg-green-50 duration-200 ring-primary hover:ring-1">
+            <div className="flex flex-row space-x-3 items-center justify-center px-8 py-2 bg-secondary text-white rounded-md hover:text-secondary hover:bg-green-50 duration-200 ring-secondary hover:ring-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

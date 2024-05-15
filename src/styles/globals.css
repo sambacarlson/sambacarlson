@@ -7,7 +7,7 @@
 
 @layer components {
   .btn-portforlio{
-    @apply bg-tertiary rounded-3xl  px-4 py-2 text-white hover:cursor-pointer hover:bg-secondaryLight hover:text-primary text-center border-tertiaryLight border duration-300 active:bg-white
+    @apply bg-defaultLight rounded-3xl  px-4 py-2 text-default hover:cursor-pointer border-transparent hover:border-default border-2 text-center duration-300 active:bg-white
   }
 }
 

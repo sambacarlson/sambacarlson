@@ -1,8 +1,11 @@
+import { Navbar } from "@/components/organisms";
 import Link from "next/link";
 import React from "react";
 
 export default function Teacher() {
   return (
+    <div className="flex flex-col">
+      <Navbar profile={"teacher"} />
     <div className="flex flex-col items-center justify-center min-h-screen text-center">
       <p>This page is undergoing maintainance.</p>
       <p>Come back later 🙏🏿</p>
@@ -12,6 +15,7 @@ export default function Teacher() {
       >
         Go Back
       </Link>
+    </div>
     </div>
   );
 }

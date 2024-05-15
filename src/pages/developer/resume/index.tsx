@@ -25,7 +25,7 @@ export default function Resume() {
     console.log("download resume pdf");
   };
   return (
-    <main className="flex flex-col items-center text-primary w-full max-w-[750px] min-h-[1000px] mx-auto font-gothic leading-6 border border-stone-100">
+    <main className="flex flex-col items-center text-black w-full max-w-[750px] min-h-[1000px] mx-auto font-gothic leading-6 border border-stone-100">
       <h4
         onClick={downloadPDF}
         className="hidden fixed right-[5%] top-10 rounded-lg py-2 px-4 hover:cursor-pointer z-20 border-2 text-sm border-yellow-400 text-yellow-400 bg-emerald-900 animate-pulse hover:animate-none duration-300 hover:border-white active:border-yellow-400 active:bg-emerald-700"
@@ -56,25 +56,25 @@ export default function Resume() {
           </div>
           <div className="grid grid-cols-2 gap-x-5 gap-y-2 mt-8 tablet:mt-0 text-[15px]">
             <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1 break-all">
-              <span className="text-secondary pt-[0.4rem]">
+              <span className="text-secondary flex items-center">
                 <MdEmail />
               </span>
-              <p>sambacarlson@gmail.com</p>
+              <p className="whitespace-nowrap">sambacarlson@gmail.com</p>
             </div>
             <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1">
-              <span className="text-secondary pt-[0.4rem]">
+              <span className="text-secondary  flex items-center">
                 <PiPhoneCallFill />
               </span>
               <p>+237677964952</p>
             </div>
             <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1 break-all">
-              <span className="text-secondary pt-[0.4rem]">
+              <span className="text-secondary  flex items-center">
                 <SiLinkedin />
               </span>
-              <p>linkedin.com/in/sambacarlson</p>
+              <p className="whitespace-nowrap">linkedin.com/in/sambacarlson</p>
             </div>
-            <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1">
-              <span className="text-secondary pt-[0.4rem]">
+            <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1 items-center">
+              <span className="text-secondary flex items-center">
                 <MdLocationOn />
               </span>
               <p>Molyko, Buea Cameroon</p>
@@ -204,7 +204,7 @@ const Experience = ({ exp }: { exp: ExperienceType }) => {
         <ul className="list-disc list-outside pl-[0.9em]">
           {exp.activities.highlights.map((item: string) => (
             <li key={item} className="text-secondary">
-              <span className="text-primary">{item}</span>
+              <span className="text-black">{item}</span>
             </li>
           ))}
         </ul>
