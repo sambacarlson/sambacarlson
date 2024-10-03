@@ -37,21 +37,21 @@ export default function Resume() {
         <div className="col-span-5 tablet:col-span-2 p-4 tablet:p-8 flex flex-col items-center tablet:mr-2 tablet:bg-stone-50">
           <div className="overflow-hidden bg-stone-600 tablet:border-[0.4em] border-stone-600 w-[9em] h-[9em] tablet:h-[12em] tablet:w-[12em] rounded-full  z-10 ">
             <Image
-              src="/me1.jpg"
-              alt="Samba Carlson"
+              src="/noella.jpg"
+              alt="Noella"
               width={360}
               height={360}
-              className="object-cover h-full transform -scale-x-100"
+              className="object-cover  transform  rotate-[26deg] scale-125 -translate-x-4"
             />
           </div>
         </div>
         <div className="col-span-5 tablet:col-span-3 p-4 tablet:p-0 tablet:space-y-5 tablet:pb-10 flex flex-col h-full justify-end z-10">
           <div className="flex flex-col items-center tablet:items-start justify-end flex-1 text-white tablet:pb-2 ">
             <h1 className="text-xl tablet:text-3xl font-bold">
-              Kwahnwe Samba Carlson
+              Mburli Samba Noella
             </h1>
             <h3 className="font-bold text-base tablet:text-md tracking-[0.5em] text-center">
-              SOFTWARE ENGINEER
+              SALES AGENT
             </h3>
           </div>
           <div className="grid grid-cols-2 gap-x-5 gap-y-2 mt-8 tablet:mt-0 text-[15px]">
@@ -59,20 +59,20 @@ export default function Resume() {
               <span className="text-secondary flex items-center">
                 <MdEmail />
               </span>
-              <p className="whitespace-nowrap">sambacarlson@gmail.com</p>
+              <p className="whitespace-nowrap">mburlinoella@gmail.com</p>
             </div>
             <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1">
               <span className="text-secondary  flex items-center">
                 <PiPhoneCallFill />
               </span>
-              <p>+237677964952</p>
+              <p>+237672805268</p>
             </div>
-            <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1 break-all">
+            {/* <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1 break-all">
               <span className="text-secondary  flex items-center">
                 <SiLinkedin />
               </span>
               <p className="whitespace-nowrap">linkedin.com/in/sambacarlson</p>
-            </div>
+            </div> */}
             <div className="flex flex-row gap-x-1 col-span-2 tablet:col-span-1 items-center">
               <span className="text-secondary flex items-center">
                 <MdLocationOn />
@@ -131,7 +131,7 @@ export default function Resume() {
                 />
               ))}
             </div>
-            <div className="hidden tablet:flex flex-col w-full">
+            {/* <div className="hidden tablet:flex flex-col w-full">
               <h3 className="font-bold text-xl text-secondary mt-8 tablet:mt-4 border-b border-secondaryLight">
                 Links
               </h3>
@@ -140,7 +140,7 @@ export default function Resume() {
                   <Links key={ln.ref} lnk={{ title: ln.title, ref: ln.ref }} />
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col w-full tablet:hidden">
             <h3 className="font-bold text-xl text-secondary mt-8 tablet:mt-4 border-b border-secondaryLight">
