@@ -1,0 +1,1 @@
+export type ProfileType = "default" | "teacher" | "designer" | "theologian" | "developer"

@@ -5,6 +5,12 @@
 @tailwind utilities;
 
 
+@layer components {
+  .btn-portforlio{
+    @apply bg-defaultLight rounded-3xl  px-4 py-2 text-default hover:cursor-pointer border-transparent hover:border-default border-2 text-center duration-300 active:bg-white
+  }
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

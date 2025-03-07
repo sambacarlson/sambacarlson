@@ -1,0 +1,2 @@
+
+export const devIntro = "Hi. My name is Samba Carlson. I am a software developer with over 3 years of professional experience. I am particulary interested in building optimal and rubust web, desktop and mobile applications."
