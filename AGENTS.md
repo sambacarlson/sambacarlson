@@ -17,45 +17,51 @@
 
 ```
 sambacarlson/
-  src/                          # Frontend (Next.js)
-    pages/          # Pages Router routes
-      index.tsx     # Unified homepage — all sections inlined (Navbar, Hero, About, Engineering, Teaching, Theology, Education, Contact Form, Footer)
-      resume/        # Resume page (/resume) — sub-components defined at bottom of file
-      404/           # 404 page
-      _app.tsx       # App wrapper (globals.css + React Query provider)
-      _document.tsx  # Document template (fonts, meta)
-    data/            # Single source of truth for ALL content
-      profile/       # Name, tagline, bio, photo, contact, social links
-      experience/    # All work experience (with `domain` field for filtering)
-      education/     # Education entries
-      skills/        # Skill categories (used on resume only)
-      teaching/      # Teaching subjects (in-school and out-of-school)
-      theology/      # Theology bio, roles, tradition
-      links/         # External links
-      text.ts         # Standalone text strings (profile text for resume)
-      index.ts       # Re-exports all data
-    types/           # TypeScript types matching each data file
-    utils/           # Helpers (getThemeColor)
-    styles/          # globals.css (Tailwind + custom button class)
-  public/            # Static assets (images, robots.txt, sitemap.xml)
-  backend/           # Go API (Gin + sqlc + Postgres)
-    cmd/api/         # Entry point
+  frontend/                      # Next.js frontend
+    src/
+      pages/          # Pages Router routes
+        index.tsx     # Unified homepage — all sections inlined (Navbar, Hero, About, Engineering, Teaching, Theology, Education, Contact Form, Footer)
+        resume/        # Resume page (/resume) — sub-components defined at bottom of file
+        404/           # 404 page
+        _app.tsx       # App wrapper (globals.css + React Query provider)
+        _document.tsx  # Document template (fonts, meta)
+      data/            # Single source of truth for ALL content
+        profile/       # Name, tagline, bio, photo, contact, social links
+        experience/    # All work experience (with `domain` field for filtering)
+        education/     # Education entries
+        skills/        # Skill categories (used on resume only)
+        teaching/      # Teaching subjects (in-school and out-of-school)
+        theology/      # Theology bio, roles, tradition
+        links/         # External links
+        text.ts         # Standalone text strings (profile text for resume)
+        index.ts       # Re-exports all data
+      types/           # TypeScript types matching each data file
+      utils/           # Helpers (getThemeColor)
+      styles/          # globals.css (Tailwind + custom button class)
+    public/            # Static assets (images, robots.txt, sitemap.xml)
+    next.config.js     # Redirects for old routes
+    tailwind.config.js # Colors, fonts, animations (keep as-is)
+    tsconfig.json      # @/ path alias → ./src/
+  backend/             # Go API (Gin + sqlc + Postgres)
+    cmd/api/           # Entry point
     internal/
-      database/      # Postgres connection pool
-      server/        # Gin router, CORS middleware
-      handlers/      # HTTP handlers (messages)
+      database/        # Postgres connection pool
+      server/          # Gin router, CORS middleware
+      handlers/        # HTTP handlers (messages)
     db/
-      migrations/    # SQL migration files
-      queries/       # sqlc query files
-      sqlc.yaml      # sqlc config
+      migrations/      # SQL migration files
+      queries/         # sqlc query files
+      sqlc.yaml        # sqlc config
     docker-compose.yaml
     Makefile
     .env
+  AGENTS.md
+  plan.md
 ```
 
 ## Environment Variables
 
-### Frontend (`.env.local`)
+### Frontend (`frontend/.env.local`)
 - `NEXT_PUBLIC_API_URL` — URL of the Go backend (e.g. `http://localhost:8080` for dev)
 
 ### Backend (`backend/.env`)
@@ -93,10 +99,17 @@ Keep these styles.
 ## Build & Conventions
 
 ### Commands
+All frontend commands run from `frontend/`:
 - `npm run dev` — start dev server
 - `npm run build` — production build
 - `npm run start` — serve production build
 - `npm run lint` — ESLint check
+
+Backend commands run from `backend/`:
+- `make run` — start Go API on :8080
+- `make migrate` — run SQL migrations against Postgres
+- `make sqlc` — generate Go code from SQL queries
+- `docker-compose up -d` — start local Postgres on port 5470
 
 ### Path Aliases
 `@/` maps to `./src/` (configured in `tsconfig.json`). Use `@/data`, `@/types`, `@/utils`.
