@@ -15,5 +15,10 @@ export const myProfile: ProfileDataType = {
       href: "https://github.com/sambacarlson",
       icon: "github",
     },
+    {
+      label: "YouTube",
+      href: "https://youtube.com/@sambacarlson",
+      icon: "youtube",
+    },
   ],
 };

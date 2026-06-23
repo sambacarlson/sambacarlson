@@ -2,41 +2,64 @@
 
 ## Overview
 
-**sambacarlson** is the personal portfolio site for Samba Carlson — a software engineer, educator, and theologian based in Buea, Cameroon. The site is a single unified homepage with anchor-scroll sections covering all three personas, plus a separate resume page. Deployed on Vercel.
+**sambacarlson** is the personal portfolio site for Samba Carlson — a software engineer, educator, and theologian based in Buea, Cameroon. The site is a single unified homepage with anchor-scroll sections covering all three personas, plus a separate resume page. The frontend is deployed on Vercel; the backend (contact form API) runs separately.
 
 ## Stack
 
-- **Framework:** Next.js 13 (Pages Router) + React 18
-- **Language:** TypeScript
-- **Styling:** TailwindCSS
+- **Frontend:** Next.js 13 (Pages Router) + React 18 + TypeScript + TailwindCSS
+- **Backend:** Go + Gin + sqlc + PostgreSQL (monorepo at `backend/`)
+- **Data fetching:** TanStack React Query
 - **Icons:** react-icons (used on the resume page)
 - **Images:** next/image with local files in `public/`
-- **Deployment:** Vercel
+- **Deployment:** Frontend on Vercel, backend TBD (Railway/Render/Fly.io)
 
 ## Architecture
 
 ```
-src/
-  pages/          # Pages Router routes
-    index.tsx     # Unified homepage — all sections inlined (Navbar, Hero, About, Engineering, Teaching, Theology, Education, Footer)
-    resume/        # Resume page (/resume) — sub-components defined at bottom of file
-    404/           # 404 page
-    _app.tsx       # App wrapper (imports globals.css)
-    _document.tsx  # Document template (fonts, meta)
-  data/            # Single source of truth for ALL content
-    profile/       # Name, tagline, bio, photo, contact, social links
-    experience/    # All work experience (with `domain` field for filtering)
-    education/     # Education entries
-    skills/        # Skill categories (used on resume only)
-    teaching/      # Teaching subjects (in-school and out-of-school)
-    theology/      # Theology bio, roles, tradition
-    links/         # External links
-    text.ts         # Standalone text strings (profile text, dev intro, cover letter for resume)
-    index.ts       # Re-exports all data
-  types/           # TypeScript types matching each data file
-  utils/           # Helpers (getThemeColor)
-  styles/          # globals.css (Tailwind + custom button class)
+sambacarlson/
+  src/                          # Frontend (Next.js)
+    pages/          # Pages Router routes
+      index.tsx     # Unified homepage — all sections inlined (Navbar, Hero, About, Engineering, Teaching, Theology, Education, Contact Form, Footer)
+      resume/        # Resume page (/resume) — sub-components defined at bottom of file
+      404/           # 404 page
+      _app.tsx       # App wrapper (globals.css + React Query provider)
+      _document.tsx  # Document template (fonts, meta)
+    data/            # Single source of truth for ALL content
+      profile/       # Name, tagline, bio, photo, contact, social links
+      experience/    # All work experience (with `domain` field for filtering)
+      education/     # Education entries
+      skills/        # Skill categories (used on resume only)
+      teaching/      # Teaching subjects (in-school and out-of-school)
+      theology/      # Theology bio, roles, tradition
+      links/         # External links
+      text.ts         # Standalone text strings (profile text for resume)
+      index.ts       # Re-exports all data
+    types/           # TypeScript types matching each data file
+    utils/           # Helpers (getThemeColor)
+    styles/          # globals.css (Tailwind + custom button class)
+  public/            # Static assets (images, robots.txt, sitemap.xml)
+  backend/           # Go API (Gin + sqlc + Postgres)
+    cmd/api/         # Entry point
+    internal/
+      database/      # Postgres connection pool
+      server/        # Gin router, CORS middleware
+      handlers/      # HTTP handlers (messages)
+    db/
+      migrations/    # SQL migration files
+      queries/       # sqlc query files
+      sqlc.yaml      # sqlc config
+    docker-compose.yaml
+    Makefile
+    .env
 ```
+
+## Environment Variables
+
+### Frontend (`.env.local`)
+- `NEXT_PUBLIC_API_URL` — URL of the Go backend (e.g. `http://localhost:8080` for dev)
+
+### Backend (`backend/.env`)
+- `DB_URL` — PostgreSQL connection string (e.g. `postgres://postgres:postgres@localhost:5470/sambacarlson?sslmode=disable`)
 
 ## Key Design Decisions
 

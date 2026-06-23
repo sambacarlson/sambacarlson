@@ -5,7 +5,7 @@ import { mySkills } from "./skills/skills";
 import { myTeaching } from "./teaching/teaching";
 import { myTheology } from "./theology/theology";
 import { myLinks } from "./links/links";
-import { myProfileText, devIntro, myCoverLetterBody } from "./text";
+import { myProfileText } from "./text";
 
 export {
   myProfile,
@@ -17,6 +17,4 @@ export {
   myTheology,
   myLinks,
   myProfileText,
-  devIntro,
-  myCoverLetterBody,
 };

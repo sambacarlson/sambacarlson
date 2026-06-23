@@ -1,7 +1,9 @@
 import React from "react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
 import { myProfile, myExperience, myEducation, myTeaching, myTheology } from "@/data";
 import { getThemeColor } from "@/utils";
 import type { ExperienceType, EducationType } from "@/types";
@@ -11,6 +13,7 @@ export default function Home() {
   const [showMenu, setShowMenu] = React.useState(false);
   const [theme, setTheme] = React.useState("default");
   const [themeLight, setThemeLight] = React.useState("defaultLight");
+  const [form, setForm] = React.useState({ name: "", email: "", message: "" });
 
   React.useEffect(() => {
     const [t, tl] = getThemeColor("developer");
@@ -18,11 +21,30 @@ export default function Home() {
     setThemeLight(tl);
   }, []);
 
+  const mutation = useMutation({
+    mutationFn: async (data: { name: string; email: string; message: string }) => {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+      const res = await fetch(`${apiUrl}/api/messages`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Failed to send message");
+      return res.json();
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    mutation.mutate(form);
+  };
+
   const anchors = [
     { href: "/#about", label: "About" },
     { href: "/#engineering", label: "Engineering" },
+    { href: "/#teaching", label: "Teaching" },
     { href: "/#theology", label: "Theology" },
-    { href: "/resume", label: "Resume" },
+    { href: "/#resume", label: "Resume" },
   ];
 
   const devExperience = myExperience.filter((e) => e.domain === "development");
@@ -30,7 +52,23 @@ export default function Home() {
 
   return (
     <main className="flex flex-col justify-between min-h-[100vh] text-black bg-white">
-      <title>Samba Carlson</title>
+      <Head>
+        <title>Samba Carlson — Software Engineer, Educator &amp; Theologian</title>
+        <meta name="description" content="Personal portfolio of Samba Carlson — a software engineer, educator, and theologian based in Buea, Cameroon. Building robust web and mobile applications with TypeScript and Go." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://sambacarlson.vercel.app" />
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Samba Carlson — Software Engineer, Educator & Theologian" />
+        <meta property="og:description" content="Personal portfolio of Samba Carlson — a software engineer, educator, and theologian based in Buea, Cameroon." />
+        <meta property="og:image" content="https://sambacarlson.vercel.app/me1.jpg" />
+        <meta property="og:url" content="https://sambacarlson.vercel.app" />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Samba Carlson — Software Engineer, Educator & Theologian" />
+        <meta name="twitter:description" content="Personal portfolio of Samba Carlson — a software engineer, educator, and theologian based in Buea, Cameroon." />
+        <meta name="twitter:image" content="https://sambacarlson.vercel.app/me1.jpg" />
+      </Head>
 
       {/* ===== Navbar ===== */}
       <div className="fixed w-full z-30">
@@ -118,7 +156,7 @@ export default function Home() {
             <Link href="#about" className="[&>*]:btn-portforlio">
               <span className="btn-portforlio inline-block">Learn more</span>
             </Link>
-            <Link href="">
+            <Link href="#contact-form">
               <span className="btn-portforlio inline-block">Contact</span>
             </Link>
           </div>
@@ -311,6 +349,75 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== Contact Form ===== */}
+      <section id="contact-form" className="py-16 px-6 tablet:px-16 max-w-4xl mx-auto">
+        <h2 className="text-2xl font-semibold mb-6 border-b border-secondary pb-2">
+          Get in Touch
+        </h2>
+        {mutation.isSuccess ? (
+          <div className="bg-secondaryLight text-default rounded-lg p-6 text-center">
+            <p className="text-lg font-semibold">Thank you! Your message has been sent.</p>
+            <button
+              onClick={() => {
+                setForm({ name: "", email: "", message: "" });
+                mutation.reset();
+              }}
+              className="mt-4 btn-portforlio inline-block"
+            >
+              Send another
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-4 max-w-md">
+            <div className="flex flex-col">
+              <label className="text-sm font-semibold mb-1">Name</label>
+              <input
+                type="text"
+                required
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="border border-defaultLight rounded-lg px-4 py-2 focus:outline-none focus:border-secondary"
+                placeholder="Your name"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="text-sm font-semibold mb-1">Email</label>
+              <input
+                type="email"
+                required
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="border border-defaultLight rounded-lg px-4 py-2 focus:outline-none focus:border-secondary"
+                placeholder="your@email.com"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="text-sm font-semibold mb-1">Message</label>
+              <textarea
+                required
+                rows={5}
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                className="border border-defaultLight rounded-lg px-4 py-2 focus:outline-none focus:border-secondary resize-none"
+                placeholder="Your message"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={mutation.isPending}
+              className="btn-portforlio w-fit disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {mutation.isPending ? "Sending..." : "Send Message"}
+            </button>
+            {mutation.isError && (
+              <p className="text-quatenary text-sm">
+                Something went wrong. Please try again or email me directly.
+              </p>
+            )}
+          </form>
+        )}
+      </section>
+
       {/* ===== Footer ===== */}
       <div id="contact" className="p-3 tablet:py-5 tablet:px-16 min-h-[24vh] grid grid-cols-2 justify-center text-default bg-defaultLight">
         <div className="col-span-2 tablet:col-span-1 flex flex-col space-y-4">
@@ -359,6 +466,14 @@ export default function Home() {
                     <path
                       fill={theme}
                       d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"
+                    />
+                  </svg>
+                )}
+                {link.icon === "youtube" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      fill={theme}
+                      d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
                     />
                   </svg>
                 )}

@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: sambacarlson_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sambacarlson
+    ports:
+      - "5470:5432"
+    volumes:
+      - sambacarlson_pgdata:/var/lib/postgresql/data
+
+volumes:
+  sambacarlson_pgdata:

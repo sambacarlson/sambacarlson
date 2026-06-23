@@ -2,6 +2,7 @@ import { MdEmail } from "react-icons/md";
 import { PiPhoneCallFill } from "react-icons/pi";
 import { MdLocationOn } from "react-icons/md";
 import Image from "next/image";
+import Head from "next/head";
 import Link from "next/link";
 import {
   myProfileText,
@@ -24,6 +25,17 @@ export default function Resume() {
   };
   return (
     <main className="flex flex-col items-center text-black w-full max-w-[750px] min-h-[1000px] mx-auto font-gothic leading-6 border border-stone-100">
+      <Head>
+        <title>Resume — Samba Carlson</title>
+        <meta name="description" content="Resume of Samba Carlson — Software Engineer experienced with TypeScript, Go, React, Next.js, and React Native." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://sambacarlson.vercel.app/resume" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Resume — Samba Carlson" />
+        <meta property="og:description" content="Resume of Samba Carlson — Software Engineer experienced with TypeScript, Go, React, Next.js, and React Native." />
+        <meta property="og:image" content="https://sambacarlson.vercel.app/me1.jpg" />
+        <meta property="og:url" content="https://sambacarlson.vercel.app/resume" />
+      </Head>
       <div className="print:hidden fixed top-10 left-[5%]">
         <Link
           href="/"
