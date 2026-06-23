@@ -1,15 +1,22 @@
-import { myCoverLetter } from "./coverLetter/coverLetter";
-import { myProfileText, myProfileText2, myEducation, myExperience, myReference, mySkills, myLinks } from "./resume/resume";
-import { devIntro } from "./Introduction/introduction";
+import { myProfile } from "./profile/profile";
+import { myExperience, myReference } from "./experience/experience";
+import { myEducation } from "./education/education";
+import { mySkills } from "./skills/skills";
+import { myTeaching } from "./teaching/teaching";
+import { myTheology } from "./theology/theology";
+import { myLinks } from "./links/links";
+import { myProfileText, devIntro, myCoverLetterBody } from "./text";
 
 export {
-  myProfileText2,
-  myProfileText,
+  myProfile,
   myExperience,
-  myEducation,
   myReference,
+  myEducation,
   mySkills,
-  myCoverLetter,
+  myTeaching,
+  myTheology,
   myLinks,
-  devIntro
-}
+  myProfileText,
+  devIntro,
+  myCoverLetterBody,
+};
