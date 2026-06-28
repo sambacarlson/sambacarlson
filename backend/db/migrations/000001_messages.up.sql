@@ -3,5 +3,7 @@ CREATE TABLE IF NOT EXISTS messages (
     name       TEXT NOT NULL,
     email      TEXT NOT NULL,
     message    TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT NOW()
+    subject    TEXT,
+    read_at    TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
