@@ -1,0 +1,2 @@
+export const myProfileText =
+  "Purposeful software developer with a passion for building robust and efficient applications. Having a firm understanding of fundamental software engineering principles and programming languages such as TypeScript and Go. Having a commended team spirit and commitment to continuous learning and improvement.";
