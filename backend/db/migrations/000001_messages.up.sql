@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS messages (
+CREATE TABLE messages (
     id         SERIAL PRIMARY KEY,
     name       TEXT NOT NULL,
     email      TEXT NOT NULL,
