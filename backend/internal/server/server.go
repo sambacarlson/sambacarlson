@@ -8,7 +8,7 @@ import (
 )
 
 type Server struct {
-	db    *database.DB
+	db     *database.DB
 	router *gin.Engine
 }
 
@@ -17,7 +17,7 @@ func NewServer(db *database.DB) *Server {
 
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000", "https://sambacarlson.vercel.app"},
-		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+		AllowMethods:     []string{"GET", "POST", "PATCH", "OPTIONS"},
 		AllowHeaders:     []string{"Content-Type"},
 		AllowCredentials: true,
 	}))
@@ -27,6 +27,7 @@ func NewServer(db *database.DB) *Server {
 	api := router.Group("/api")
 	{
 		api.POST("/messages", h.CreateMessage)
+		api.PATCH("/messages/:id/read", h.MarkMessageRead)
 	}
 
 	return &Server{

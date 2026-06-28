@@ -1,4 +1,4 @@
-.PHONY: build run test migrate sqlc tidy
+.PHONY: build run test migrate migrate-down create-migration sqlc tidy
 
 build:
 	go build -o bin/api cmd/api/main.go
@@ -9,8 +9,17 @@ run:
 test:
 	go test ./... -v
 
+MIGRATE_CMD = migrate -path db/migrations -database "$(DB_URL)"
+
 migrate:
-	psql $(DB_URL) -f db/migrations/001_messages.sql
+	$(MIGRATE_CMD) up
+
+migrate-down:
+	$(MIGRATE_CMD) down 1
+
+create-migration:
+	@test -n "$(name)" || (echo "Usage: make create-migration name=foo"; exit 1)
+	migrate create -ext sql -dir db/migrations -seq $(name)
 
 sqlc:
 	cd db && sqlc generate

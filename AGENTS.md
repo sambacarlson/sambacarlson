@@ -8,10 +8,11 @@
 
 - **Frontend:** Next.js 13 (Pages Router) + React 18 + TypeScript + TailwindCSS
 - **Backend:** Go + Gin + sqlc + PostgreSQL (monorepo at `backend/`)
+- **Migrations:** golang-migrate with embed.FS (auto-applied on startup)
 - **Data fetching:** TanStack React Query
 - **Icons:** react-icons (used on the resume page)
 - **Images:** next/image with local files in `public/`
-- **Deployment:** Frontend on Vercel, backend TBD (Railway/Render/Fly.io)
+- **Deployment:** Frontend on Vercel, backend (Railway/Render/Fly.io via Docker)
 
 ## Architecture
 
@@ -43,18 +44,23 @@ sambacarlson/
     tailwind.config.js # Colors, fonts, animations (keep as-is)
     tsconfig.json      # @/ path alias → ./src/
   backend/             # Go API (Gin + sqlc + Postgres)
-    cmd/api/           # Entry point
-    internal/
-      database/        # Postgres connection pool
-      server/          # Gin router, CORS middleware
-      handlers/        # HTTP handlers (messages)
-    db/
-      migrations/      # SQL migration files
-      queries/         # sqlc query files
-      sqlc.yaml        # sqlc config
-    docker-compose.yaml
+    Dockerfile          # Multi-stage Docker build (alpine)
+    .dockerignore
     Makefile
+    docker-compose.yaml # Local Postgres on port 5470
     .env
+    cmd/api/            # Entry point
+    internal/
+      database/         # Postgres connection pool + auto-migration
+      server/           # Gin router, CORS middleware
+      handlers/         # HTTP handlers (messages)
+    db/
+      migrations/       # SQL migration files (golang-migrate format)
+        embed.go        # Embeds *.sql into binary via //go:embed
+        000001_messages.up.sql
+        000001_messages.down.sql
+      queries/          # sqlc query files
+      sqlc.yaml         # sqlc config
   AGENTS.md
   plan.md
 ```
@@ -81,6 +87,21 @@ All site content lives in `src/data/*.ts` and is strongly typed. Pages pull from
 ### Extensible Contact Info
 `ProfileDataType.socialLinks` is an array so new social links (Twitter, blog, etc.) can be added by editing `src/data/profile/profile.ts` only. The Footer renders them dynamically.
 
+### Auto-Migrations on Startup
+Migrations are embedded into the Go binary via `//go:embed` in `db/migrations/embed.go` and auto-applied by `internal/database/database.go:runMigrations()` when the server starts. No manual migration step needed in production — just start the container. The `golang-migrate` library tracks applied migrations in a `schema_migrations` table.
+
+### Migration Conventions
+Migration files use `golang-migrate` naming: `NNNNNN_name.up.sql` and `NNNNNN_name.down.sql`. Down migrations are used for rollbacks. Never use `IF NOT EXISTS` / `IF EXISTS` in migration SQL — fail loudly if the schema doesn't match expectations. To add a new migration: `make create-migration name=description`.
+
+### API Endpoints
+- `POST /api/messages` — Submit contact form (name, email, message; subject optional)
+- `PATCH /api/messages/:id/read` — Mark a message as read (idempotent; returns 404 if already read)
+
+### Querying Messages
+```sh
+docker exec sambacarlon_db psql -U postgres -d sambacarlon -c "SELECT * FROM messages;"
+```
+
 ### No Component Abstractions for Single-Use Sections
 The homepage (`src/pages/index.tsx`) inlines all UI sections directly (Navbar, Hero, About, Engineering, Teaching, Theology, Education, Footer) — no separate component files. Components are only extracted when they are reused multiple times within the same page (e.g. the resume page's `Experience`, `Education`, `Skill` sub-components at the bottom of the file). This reduces indirection and keeps each page self-contained. If a section needs to be shared across pages in the future, extract it at that point.
 
@@ -106,10 +127,15 @@ All frontend commands run from `frontend/`. When invoking from the repo root, us
 - `npm run lint` — ESLint check
 
 Backend commands run from `backend/`:
-- `make run` — start Go API on :8080
-- `make migrate` — run SQL migrations against Postgres
+- `make run` — start Go API on :8080 (auto-applies pending migrations)
+- `make migrate` — run pending migrations via golang-migrate CLI
+- `make migrate-down` — roll back one migration
+- `make create-migration name=foo` — scaffold `NNNNNN_foo.up.sql` and `NNNNNN_foo.down.sql`
 - `make sqlc` — generate Go code from SQL queries
+- `make build` — compile binary to `bin/api`
+- `make test` — run Go tests
 - `docker-compose up -d` — start local Postgres on port 5470
+- `docker build -t sambacarlson-api .` — build production Docker image
 
 ### Path Aliases
 `@/` maps to `./src/` (configured in `tsconfig.json`). Use `@/data`, `@/types`, `@/utils`.
