@@ -99,7 +99,7 @@ Keep these styles.
 ## Build & Conventions
 
 ### Commands
-All frontend commands run from `frontend/`:
+All frontend commands run from `frontend/`. When invoking from the repo root, use `--prefix frontend` (e.g. `npm run build --prefix frontend`):
 - `npm run dev` — start dev server
 - `npm run build` — production build
 - `npm run start` — serve production build

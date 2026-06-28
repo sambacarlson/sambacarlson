@@ -40,11 +40,8 @@ export default function Home() {
   };
 
   const anchors = [
-    { href: "/#about", label: "About" },
-    { href: "/#engineering", label: "Engineering" },
-    { href: "/#teaching", label: "Teaching" },
-    { href: "/#theology", label: "Theology" },
-    { href: "/#resume", label: "Resume" },
+    { href: "/blog", label: "Blog" },
+    { href: "/#contact-form", label: "Contact" },
   ];
 
   const devExperience = myExperience.filter((e) => e.domain === "development");
@@ -152,7 +149,7 @@ export default function Home() {
           </h1>
           <p className="text-2xl">{myProfile.tagline}</p>
           <p className="">{myProfile.bio}</p>
-          <div className="flex flex-row gap-4 pt-4">
+          <div className="flex flex-row justify-center tablet:justify-start gap-4 pt-4">
             <Link href="#about" className="[&>*]:btn-portforlio">
               <span className="btn-portforlio inline-block">Learn more</span>
             </Link>
@@ -161,13 +158,13 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="hidden tablet:flex flex-1 bg-green-50">
+        <div className="hidden tablet:flex relative flex-1 bg-vintage-damask">
           <Image
             src={myProfile.photo}
             width={500}
             height={500}
             alt={myProfile.name}
-            className="w-auto h-[50vh] transform -scale-x-100 shadow-inner"
+            className="w-auto h-[50vh] object-cover shadow-inner"
           />
         </div>
         <div className="tablet:hidden flex justify-center py-4">
@@ -176,13 +173,13 @@ export default function Home() {
             width={300}
             height={300}
             alt={myProfile.name}
-            className="min-w-[100px] w-[60vw] h-auto rounded-full object-contain"
+            className="min-w-[100px] w-[60vw] h-auto rounded-xl object-contain"
           />
         </div>
       </section>
 
       {/* ===== About ===== */}
-      <section id="about" className="py-16 px-6 tablet:px-16 max-w-4xl mx-auto">
+      <section id="about" className="py-16 px-6 tablet:px-16 max-w-4xl w-full mx-auto">
         <h2 className="text-2xl font-semibold mb-6 border-b border-default pb-2">
           About Me
         </h2>
@@ -192,18 +189,18 @@ export default function Home() {
           </div>
           <div className="tablet:w-1/3 flex justify-center">
             <Image
-              src="/me1.jpg"
+              src="/fb_profile.jpg"
               width={200}
               height={200}
               alt={myProfile.name}
-              className="rounded-2xl object-cover w-[200px] h-[200px]"
+              className="rounded-2xl object-cover object-top w-[200px] h-[200px]"
             />
           </div>
         </div>
       </section>
 
       {/* ===== Engineering ===== */}
-      <section id="engineering" className="py-16 px-6 tablet:px-16 max-w-4xl mx-auto">
+      <section id="engineering" className="py-16 px-6 tablet:px-16 max-w-4xl w-full mx-auto">
         <h2 className="text-2xl font-semibold mb-6 border-b border-secondary pb-2">
           Software Engineering
         </h2>
@@ -243,7 +240,7 @@ export default function Home() {
       </section>
 
       {/* ===== Teaching ===== */}
-      <section id="teaching" className="py-16 px-6 tablet:px-16 max-w-4xl mx-auto">
+      <section id="teaching" className="py-16 px-6 tablet:px-16 max-w-4xl w-full mx-auto">
         <h2 className="text-2xl font-semibold mb-6 border-b border-primary pb-2">
           Teaching
         </h2>
@@ -301,7 +298,7 @@ export default function Home() {
       </section>
 
       {/* ===== Theology ===== */}
-      <section id="theology" className="py-16 px-6 tablet:px-16 max-w-4xl mx-auto">
+      <section id="theology" className="py-16 px-6 tablet:px-16 max-w-4xl w-full mx-auto">
         <h2 className="text-2xl font-semibold mb-6 border-b border-tertiary pb-2">
           Theology
         </h2>
@@ -328,7 +325,7 @@ export default function Home() {
       </section>
 
       {/* ===== Education ===== */}
-      <section id="education" className="py-16 px-6 tablet:px-16 max-w-4xl mx-auto">
+      <section id="education" className="py-16 px-6 tablet:px-16 max-w-4xl w-full mx-auto">
         <h2 className="text-2xl font-semibold mb-6 border-b border-default pb-2">
           Education
         </h2>
@@ -350,7 +347,7 @@ export default function Home() {
       </section>
 
       {/* ===== Contact Form ===== */}
-      <section id="contact-form" className="py-16 px-6 tablet:px-16 max-w-4xl mx-auto">
+      <section id="contact-form" className="py-16 px-6 tablet:px-16 max-w-4xl w-full mx-auto">
         <h2 className="text-2xl font-semibold mb-6 border-b border-secondary pb-2">
           Get in Touch
         </h2>
@@ -368,7 +365,7 @@ export default function Home() {
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col space-y-4 max-w-md">
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full">
             <div className="flex flex-col">
               <label className="text-sm font-semibold mb-1">Name</label>
               <input
@@ -376,7 +373,7 @@ export default function Home() {
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="border border-defaultLight rounded-lg px-4 py-2 focus:outline-none focus:border-secondary"
+                className="border border-defaultLight rounded-lg w-full max-w-sm px-4 py-2 focus:outline-none focus:border-secondary"
                 placeholder="Your name"
               />
             </div>
@@ -387,7 +384,7 @@ export default function Home() {
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="border border-defaultLight rounded-lg px-4 py-2 focus:outline-none focus:border-secondary"
+                className="border border-defaultLight rounded-lg w-full max-w-sm px-4 py-2 focus:outline-none focus:border-secondary"
                 placeholder="your@email.com"
               />
             </div>
@@ -398,7 +395,7 @@ export default function Home() {
                 rows={5}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="border border-defaultLight rounded-lg px-4 py-2 focus:outline-none focus:border-secondary resize-none"
+                className="border border-defaultLight rounded-lg w-full max-w-sm px-4 py-2 focus:outline-none focus:border-secondary resize-none"
                 placeholder="Your message"
               />
             </div>
@@ -454,6 +451,14 @@ export default function Home() {
               </svg>
               <Link href={`mailto:${myProfile.contact.email}`} className="hover:underline">
                 {myProfile.contact.email}
+              </Link>
+            </div>
+            <div className="flex flex-row items-center space-x-3 tablet:space-x-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill={theme} d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h5v7h7v9H6z"/>
+              </svg>
+              <Link href="/resume" className="hover:underline">
+                Resume
               </Link>
             </div>
             {myProfile.socialLinks.map((link) => (

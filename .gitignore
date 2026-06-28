@@ -34,3 +34,9 @@ next-env.d.ts
 # backend
 backend/bin/
 backend/generated/
+
+# playwright test artifacts
+.playwright-mcp/
+
+# screenshots
+*.png

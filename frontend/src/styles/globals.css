@@ -1,13 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-  .btn-portforlio{
-    @apply bg-defaultLight rounded-3xl  px-4 py-2 text-default hover:cursor-pointer border-transparent hover:border-default border-2 text-center duration-300 active:bg-white
+  .btn-portforlio {
+    @apply bg-defaultLight rounded-3xl  px-4 py-2 text-default hover:cursor-pointer border-transparent hover:border-default border-2 text-center duration-300 active:bg-white;
+  }
+
+  .bg-vintage-damask {
+    background-color: #f5f0e8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='83.138' height='72' viewBox='0 0 83.138 72'%3E%3Cg fill='none' stroke='%236b5a45' stroke-width='2' opacity='0.35' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(0,0)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(41.569,0)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(83.138,0)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(20.785,36)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(62.354,36)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(-20.785,36)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(103.923,36)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(0,72)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(41.569,72)'/%3E%3Cpath d='M0,-24 L20.785,-12 L20.785,12 L0,24 L-20.785,12 L-20.785,-12 Z' transform='translate(83.138,72)'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
   }
 }
 
