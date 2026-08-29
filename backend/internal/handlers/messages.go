@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sambacarlson/backend/internal/database"
@@ -25,13 +26,13 @@ type CreateMessageRequest struct {
 }
 
 type MessageResponse struct {
-	ID        int     `json:"id"`
-	Name      string  `json:"name"`
-	Email     string  `json:"email"`
-	Message   string  `json:"message"`
-	Subject   *string `json:"subject"`
-	ReadAt    *string `json:"read_at"`
-	CreatedAt string  `json:"created_at"`
+	ID        int        `json:"id"`
+	Name      string     `json:"name"`
+	Email     string     `json:"email"`
+	Message   string     `json:"message"`
+	Subject   *string    `json:"subject"`
+	ReadAt    *time.Time `json:"read_at"`
+	CreatedAt time.Time  `json:"created_at"`
 }
 
 func (h *Handler) CreateMessage(c *gin.Context) {
