@@ -51,9 +51,14 @@ func allowedOrigins() []string {
 		return []string{"http://localhost:3000"}
 	}
 
-	origins := strings.Split(raw, ",")
-	for i, o := range origins {
-		origins[i] = strings.TrimSpace(o)
+	origins := make([]string, 0, strings.Count(raw, ",")+1)
+	for _, o := range strings.Split(raw, ",") {
+		if o = strings.TrimSpace(o); o != "" {
+			origins = append(origins, o)
+		}
+	}
+	if len(origins) == 0 {
+		return []string{"http://localhost:3000"}
 	}
 	return origins
 }
