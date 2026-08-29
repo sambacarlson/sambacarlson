@@ -1,7 +1,10 @@
-.PHONY: build run test migrate migrate-down create-migration sqlc tidy
+.PHONY: build build-local run test migrate migrate-down create-migration sqlc tidy
+
+build-local:
+	go build -o bin/api cmd/api/main.go
 
 build:
-	go build -o bin/api cmd/api/main.go
+	docker build -t sambacarlson-backend .
 
 run:
 	go run cmd/api/main.go

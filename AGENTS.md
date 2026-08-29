@@ -67,11 +67,14 @@ sambacarlson/
 
 ## Environment Variables
 
-### Frontend (`frontend/.env.local`)
-- `NEXT_PUBLIC_API_URL` — URL of the Go backend (e.g. `http://localhost:8080` for dev)
+### Frontend (`frontend/.env.local`, see `frontend/.env.local.example`)
+- `BACKEND_URL` — URL of the Go backend, read server-side inside `src/pages/api/messages.ts` on every request and forwarded to. The browser never sees this value. Defaults to `http://localhost:8080` outside production; no fallback in production, so a misconfigured deploy returns a `500` instead of silently pointing at `localhost`.
 
-### Backend (`backend/.env`)
+### Backend (`backend/.env`, see `backend/.env.example`)
 - `DB_URL` — PostgreSQL connection string (e.g. `postgres://postgres:postgres@localhost:5470/sambacarlson?sslmode=disable`)
+- `PORT` — port the API listens on, defaults to `8080`
+- `GIN_MODE` — `release` or `debug`; defaults to `release` if unset
+- `ALLOWED_ORIGINS` — comma-separated CORS allowlist; only relevant for direct API clients other than the website itself, since the frontend talks to the API through its own same-origin proxy
 
 ## Key Design Decisions
 
@@ -89,6 +92,9 @@ All site content lives in `src/data/*.ts` and is strongly typed. Pages pull from
 
 ### Auto-Migrations on Startup
 Migrations are embedded into the Go binary via `//go:embed` in `db/migrations/embed.go` and auto-applied by `internal/database/database.go:runMigrations()` when the server starts. No manual migration step needed in production — just start the container. The `golang-migrate` library tracks applied migrations in a `schema_migrations` table.
+
+### Same-Origin API Proxy
+The frontend never calls the backend directly from the browser. `src/pages/api/messages.ts` is a Next.js API route that reads `BACKEND_URL` and forwards the request server-side, so the browser only ever talks to its own origin. It reads the env var fresh on every request (not baked in at build time — plain `next.config.js` `rewrites()` would freeze the destination into `routes-manifest.json` at build time and NOT observe a later env var change, which is why this uses an API route instead). This means: no CORS allowlist to maintain per deploy, the backend's real address is never exposed to the browser, and repointing the site at a different backend deployment is a `BACKEND_URL` env var change + restart — no rebuild.
 
 ### Migration Conventions
 Migration files use `golang-migrate` naming: `NNNNNN_name.up.sql` and `NNNNNN_name.down.sql`. Down migrations are used for rollbacks. Never use `IF NOT EXISTS` / `IF EXISTS` in migration SQL — fail loudly if the schema doesn't match expectations. To add a new migration: `make create-migration name=description`.
@@ -120,22 +126,24 @@ Keep these styles.
 ## Build & Conventions
 
 ### Commands
-All frontend commands run from `frontend/`. When invoking from the repo root, use `--prefix frontend` (e.g. `npm run build --prefix frontend`):
-- `npm run dev` — start dev server
-- `npm run build` — production build
-- `npm run start` — serve production build
+Each service has its own `Makefile` with consistent targets: `make run` for fast local dev (no Docker), `make build` for producing the deployable Docker image (used occasionally, not per-change).
+
+Frontend (`frontend/`):
+- `make run` — `npm run dev`, start dev server
+- `make build` — build the `sambacarlson-frontend` Docker image
 - `npm run lint` — ESLint check
 
-Backend commands run from `backend/`:
-- `make run` — start Go API on :8080 (auto-applies pending migrations)
-- `make migrate` — run pending migrations via golang-migrate CLI
-- `make migrate-down` — roll back one migration
-- `make create-migration name=foo` — scaffold `NNNNNN_foo.up.sql` and `NNNNNN_foo.down.sql`
-- `make sqlc` — generate Go code from SQL queries
-- `make build` — compile binary to `bin/api`
+Backend (`backend/`):
+- `make run` — `go run cmd/api/main.go`, start the API on `:8080` (or `$PORT`), auto-applies pending migrations
+- `make build` — build the `sambacarlson-backend` Docker image
+- `make build-local` — compile a native binary to `bin/api` (quick compile check, not for deployment)
 - `make test` — run Go tests
-- `docker-compose up -d` — start local Postgres on port 5470
-- `docker build -t sambacarlson-api .` — build production Docker image
+- `make migrate` / `make migrate-down` — run/roll back migrations via the `golang-migrate` CLI
+- `make create-migration name=foo` — scaffold a new migration
+- `make sqlc` — generate Go code from SQL queries
+- `docker compose up -d` (from `backend/`) — start local Postgres on port 5470. This is the only service that uses Docker Compose; frontend and backend are started individually via their Makefiles.
+
+To run the whole site locally: `docker compose up -d` (from `backend/`) → `make run` (from `backend/`) → `make run` (from `frontend/`, with `BACKEND_URL` in `frontend/.env.local` if not using the `http://localhost:8080` default).
 
 ### Path Aliases
 `@/` maps to `./src/` (configured in `tsconfig.json`). Use `@/data`, `@/types`, `@/utils`.
