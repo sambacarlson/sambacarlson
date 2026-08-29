@@ -420,6 +420,82 @@ git commit -m "feat(frontend): add same-origin /api/messages proxy route reading
 
 ---
 
+### Task 3.5: Fix backend TIMESTAMP-scan bug (pre-existing, unblocks Task 4/8 verification)
+
+**Discovered during Task 3's verification, not in the original plan.** `backend/internal/handlers/messages.go` scans Postgres `TIMESTAMP` columns (`read_at`, `created_at`) into Go `string`/`*string` fields. pgx v5 cannot decode a binary-format timestamp into a string — every real `POST /api/messages` (and `PATCH /api/messages/:id/read`, which hits the same pattern) returns `500 {"error":"Failed to save message"}` even though the row is inserted successfully. Confirmed repro: `scan err: can't scan into dest[6] (col: created_at): cannot scan timestamp (OID 1114) in binary format into *string`. This has nothing to do with deployment/containerization, but Task 4 Step 4 and Task 8 both submit the contact form for real and expect a success response — they will fail on this bug if it isn't fixed first.
+
+**Files:**
+- Modify: `backend/internal/handlers/messages.go`
+
+**Interfaces:**
+- Consumes: nothing new.
+- Produces: `MessageResponse.CreatedAt` becomes `time.Time` (was `string`), `MessageResponse.ReadAt` becomes `*time.Time` (was `*string`). JSON output changes from an arbitrary string to an RFC3339 timestamp string (still a JSON string — no frontend code reads this field today, so this is not a breaking change to anything in this repo).
+
+- [ ] **Step 1: Fix the struct fields and add the `time` import**
+
+In `backend/internal/handlers/messages.go`, change the import block (currently lines 3-10):
+
+```go
+import (
+	"context"
+	"net/http"
+	"strconv"
+	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sambacarlson/backend/internal/database"
+)
+```
+
+And change the `MessageResponse` struct (currently lines 27-35):
+
+```go
+type MessageResponse struct {
+	ID        int        `json:"id"`
+	Name      string     `json:"name"`
+	Email     string     `json:"email"`
+	Message   string     `json:"message"`
+	Subject   *string    `json:"subject"`
+	ReadAt    *time.Time `json:"read_at"`
+	CreatedAt time.Time  `json:"created_at"`
+}
+```
+
+No other code needs to change — `CreateMessage` and `MarkMessageRead` both already `.Scan(...)` into `&resp.ReadAt` and `&resp.CreatedAt` by pointer, and pgx v5 natively supports scanning a Postgres `TIMESTAMP` into `time.Time`/`*time.Time`.
+
+- [ ] **Step 2: Verify it builds**
+
+Run: `cd backend && go build ./... && go test ./... -v`
+Expected: build succeeds, existing tests still pass (this task doesn't add new tests — there's no pure-function logic here to unit test in isolation; the fix is verified end-to-end in Step 3).
+
+- [ ] **Step 3: Manually verify against a real Postgres**
+
+```bash
+cd backend && docker compose up -d && make run
+```
+In another terminal:
+```bash
+curl -i -X POST http://localhost:8080/api/messages -H "Content-Type: application/json" -d '{"name":"a","email":"a@example.com","message":"hi"}'
+```
+Expected: `HTTP/1.1 201 Created` with a JSON body including `"created_at":"<RFC3339 timestamp>"` and `"read_at":null` — no more `500`.
+
+Then verify `PATCH .../read` also works (replace `<id>` with the `id` from the response above):
+```bash
+curl -i -X PATCH http://localhost:8080/api/messages/<id>/read
+```
+Expected: `HTTP/1.1 200 OK` with `"read_at":"<RFC3339 timestamp>"` populated.
+
+Stop the server with Ctrl-C when confirmed.
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add backend/internal/handlers/messages.go
+git commit -m "fix(backend): scan TIMESTAMP columns into time.Time instead of string"
+```
+
+---
+
 ### Task 4: Contact form uses the same-origin proxy instead of `NEXT_PUBLIC_API_URL`
 
 **Files:**
