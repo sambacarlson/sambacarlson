@@ -17,12 +17,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
 
-  const backendRes = await fetch(`${backendUrl}/api/messages`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(req.body),
-  });
+  try {
+    const backendRes = await fetch(`${backendUrl}/api/messages`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(req.body),
+    });
 
-  const data = await backendRes.json();
-  res.status(backendRes.status).json(data);
+    const data = await backendRes.json();
+    res.status(backendRes.status).json(data);
+  } catch (err) {
+    console.error("Failed to reach backend for /api/messages:", err);
+    res.status(502).json({ error: "Failed to reach backend" });
+  }
 }
